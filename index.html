@@ -8,9 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="wallpaper-container" id="wallpaper"></div>
+    <div class="wallpaper-container"></div>
     
-    <div class="ui-wrapper">
+    <div id="dashboard" class="ui-wrapper">
         <div class="clock-section">
             <h1 id="clock">00:00</h1>
             <p id="date">LOADING...</p>
@@ -22,13 +22,21 @@
         </div>
 
         <div class="apps">
-            <div class="app-card" onclick="location.href='https://duckduckgo.com'"><img src="https://simpleicons.org/icons/duckduckgo.svg" alt=""><span>DuckDuckGo</span></div>
-            <div class="app-card" onclick="location.href='https://wikipedia.org'"><img src="https://simpleicons.org/icons/wikipedia.svg" alt=""><span>Wikipedia</span></div>
-            <div class="app-card" onclick="location.href='https://tiktok.com'"><img src="https://simpleicons.org/icons/tiktok.svg" alt=""><span>TikTok</span></div>
-            <div class="app-card" onclick="location.href='https://soundcloud.com'"><img src="https://simpleicons.org/icons/soundcloud.svg" alt=""><span>Music</span></div>
-            <div class="app-card" onclick="location.href='https://twitch.tv'"><img src="https://simpleicons.org/icons/twitch.svg" alt=""><span>Gaming</span></div>
-            <div class="app-card" onclick="location.href='https://roblox.com'"><img src="https://simpleicons.org/icons/roblox.svg" alt=""><span>Roblox</span></div>
+            <div class="app-card" onclick="proxyLaunch('https://www.bing.com')"><img src="https://simpleicons.org/icons/bing.svg" alt=""><span>Bing</span></div>
+            <div class="app-card" onclick="proxyLaunch('https://www.wikipedia.org')"><img src="https://simpleicons.org/icons/wikipedia.svg" alt=""><span>Wikipedia</span></div>
+            <div class="app-card" onclick="proxyLaunch('https://www.reddit.com')"><img src="https://simpleicons.org/icons/reddit.svg" alt=""><span>Reddit</span></div>
+            <div class="app-card" onclick="proxyLaunch('https://www.soundcloud.com')"><img src="https://simpleicons.org/icons/soundcloud.svg" alt=""><span>Music</span></div>
+            <div class="app-card" onclick="proxyLaunch('https://www.twitch.tv')"><img src="https://simpleicons.org/icons/twitch.svg" alt=""><span>Gaming</span></div>
+            <div class="app-card" onclick="proxyLaunch('https://www.roblox.com')"><img src="https://simpleicons.org/icons/roblox.svg" alt=""><span>Roblox</span></div>
         </div>
+    </div>
+
+    <div id="web-view-container" class="hidden">
+        <div class="top-bar">
+            <button onclick="closeSite()">✕ Close</button>
+            <span id="current-url">Loading...</span>
+        </div>
+        <iframe id="web-frame" src=""></iframe>
     </div>
 
     <script src="script.js"></script>
