@@ -1,8 +1,8 @@
 :root {
     --bg-color: #0b0b0b;
     --card-bg: rgba(255, 255, 255, 0.03);
-    --border: rgba(255, 255, 255, 0.1);
-    --accent: #ffffff;
+    --dock-bg: rgba(20, 20, 20, 0.6);
+    --border: rgba(255, 255, 255, 0.08);
 }
 
 body, html {
@@ -21,29 +21,20 @@ body, html {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    z-index: 2;
 }
 
-/* Clock Stylling */
-.clock-section { text-align: center; margin-bottom: 40px; }
-#clock { font-size: 7rem; font-weight: 300; margin: 0; letter-spacing: -2px; }
-#date { font-size: 0.8rem; letter-spacing: 4px; opacity: 0.5; margin-top: 10px; }
+#clock { font-size: 7rem; font-weight: 200; margin: 0; letter-spacing: -2px; }
+#date { font-size: 0.8rem; letter-spacing: 4px; opacity: 0.4; margin-bottom: 40px; }
 
-/* Search Bar */
 .search-bar {
-    width: 500px;
+    width: 450px;
     background: var(--card-bg);
     backdrop-filter: blur(10px);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
+    border-radius: 14px;
     padding: 14px 20px;
-    margin-bottom: 60px;
-    transition: border 0.3s;
+    margin-bottom: 20px;
 }
-
-.search-bar:focus-within { border-color: rgba(255, 255, 255, 0.3); }
 
 #search-input {
     background: transparent;
@@ -52,29 +43,61 @@ body, html {
     color: white;
     width: 100%;
     font-size: 1rem;
+    text-align: center;
 }
 
-/* Apps Grid */
-.apps { display: flex; gap: 40px; }
-.app-card {
+/* DOCK STYLING */
+.dock-container {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+}
+
+.dock {
+    background: var(--dock-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 8px 15px;
+    display: flex;
     align-items: center;
+    gap: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.dock-item {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid transparent;
 }
 
-.app-card:hover { transform: translateY(-8px); }
+.dock-item i { width: 18px; height: 18px; }
 
-.app-card img {
-    width: 45px;
-    height: 45px;
-    filter: invert(1); /* Makes black icons white to match dark mode */
-    margin-bottom: 12px;
-    opacity: 0.8;
+.dock-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    transform: translateY(-4px);
+    border-color: var(--border);
 }
 
-.app-card span { font-size: 0.7rem; letter-spacing: 1px; opacity: 0.4; text-transform: uppercase; }
+.divider {
+    width: 1px;
+    height: 24px;
+    background: var(--border);
+    margin: 0 5px;
+}
+
+.heart { color: #ff4d4d; }
+.heart:hover { background: rgba(255, 77, 77, 0.15); color: #ff4d4d; }
 
 /* Browser View */
 #view-container {
@@ -97,16 +120,16 @@ body, html {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid var(--border);
+    color: white;
 }
 
 .close-btn {
     background: white;
     border: none;
-    color: black;
-    padding: 6px 15px;
+    padding: 5px 15px;
     border-radius: 4px;
-    font-weight: 600;
     cursor: pointer;
+    font-weight: 600;
 }
 
 #browser-frame { flex: 1; border: none; width: 100%; }
