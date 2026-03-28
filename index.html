@@ -6,6 +6,7 @@
     <title>Reulus</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <div class="ui-wrapper" id="main-ui">
@@ -18,34 +19,34 @@
             <input type="text" id="search-input" placeholder="Search or enter URL..." autofocus>
         </div>
 
-        <div class="apps">
-            <div class="app-card" onclick="launch('https://www.google.com')">
-                <img src="https://cdn.simpleicons.org/google/white" alt="">
-                <span>Google</span>
+        <nav class="dock-container">
+            <div class="dock">
+                <div class="dock-item" onclick="launch('https://discord.com')"><i data-lucide="message-square"></i></div>
+                <div class="dock-item" onclick="launch('https://poki.com')"><i data-lucide="gamepad-2"></i></div>
+                <div class="dock-item"><i data-lucide="layout-grid"></i></div>
+                <div class="dock-item"><i data-lucide="globe"></i></div>
+                <div class="dock-item"><i data-lucide="phone"></i></div>
+                <div class="dock-item"><i data-lucide="settings"></i></div>
+                <div class="divider"></div>
+                <div class="dock-item"><i data-lucide="message-circle"></i></div>
+                <div class="dock-item"><i data-lucide="bot"></i></div>
+                <div class="dock-item"><i data-lucide="gem"></i></div>
+                <div class="dock-item"><i data-lucide="music"></i></div>
+                <div class="dock-item heart"><i data-lucide="heart"></i></div>
             </div>
-            <div class="app-card" onclick="launch('https://www.tiktok.com')">
-                <img src="https://cdn.simpleicons.org/tiktok/white" alt="">
-                <span>TikTok</span>
-            </div>
-            <div class="app-card" onclick="launch('https://www.roblox.com')">
-                <img src="https://cdn.simpleicons.org/roblox/white" alt="">
-                <span>Roblox</span>
-            </div>
-            <div class="app-card" onclick="launch('https://www.twitch.tv')">
-                <img src="https://cdn.simpleicons.org/twitch/white" alt="">
-                <span>Twitch</span>
-            </div>
-        </div>
+        </nav>
     </div>
 
     <div id="view-container" class="hidden">
         <div class="nav-controls">
             <button onclick="closeView()" class="close-btn">ESC</button>
             <span id="current-url"></span>
-            <div style="width: 50px;"></div> </div>
+            <div style="width: 50px;"></div>
+        </div>
         <iframe id="browser-frame" src=""></iframe>
     </div>
 
     <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>
