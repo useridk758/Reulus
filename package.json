@@ -1,7 +1,7 @@
 {
   "name": "reulus-web",
   "version": "1.0.0",
-  "description": "High-end web utility",
+  "description": "Reulus Masterclass UI",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
