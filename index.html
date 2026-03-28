@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reulus | Web</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">REULUS</h1>
+            <p>Enter a URL to get started</p>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="url-input" placeholder="https://google.com or search...">
+            <button id="go-btn">Go</button>
+        </div>
+
+        <div class="quick-links">
+            <div class="link-card" onclick="launch('https://youtube.com')">YouTube</div>
+            <div class="link-card" onclick="launch('https://discord.com')">Discord</div>
+            <div class="link-card" onclick="launch('https://google.com')">Google</div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
