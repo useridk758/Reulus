@@ -3,41 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reulus</title>
+    <title>Fixed Layout</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="wallpaper-container"></div>
-    
-    <div id="dashboard" class="ui-wrapper">
-        <div class="clock-section">
-            <h1 id="clock">00:00</h1>
-            <p id="date">LOADING...</p>
-        </div>
+    <nav class="navbar">
+        <div class="logo">BRAND</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
 
-        <div class="search-bar">
-            <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-            <input type="text" id="search-input" placeholder="Search the web or enter URL...">
-        </div>
-
-        <div class="apps">
-            <div class="app-card" onclick="proxyLaunch('https://www.bing.com')"><img src="https://simpleicons.org/icons/bing.svg" alt=""><span>Bing</span></div>
-            <div class="app-card" onclick="proxyLaunch('https://www.wikipedia.org')"><img src="https://simpleicons.org/icons/wikipedia.svg" alt=""><span>Wikipedia</span></div>
-            <div class="app-card" onclick="proxyLaunch('https://www.reddit.com')"><img src="https://simpleicons.org/icons/reddit.svg" alt=""><span>Reddit</span></div>
-            <div class="app-card" onclick="proxyLaunch('https://www.soundcloud.com')"><img src="https://simpleicons.org/icons/soundcloud.svg" alt=""><span>Music</span></div>
-            <div class="app-card" onclick="proxyLaunch('https://www.twitch.tv')"><img src="https://simpleicons.org/icons/twitch.svg" alt=""><span>Gaming</span></div>
-            <div class="app-card" onclick="proxyLaunch('https://www.roblox.com')"><img src="https://simpleicons.org/icons/roblox.svg" alt=""><span>Roblox</span></div>
-        </div>
-    </div>
-
-    <div id="web-view-container" class="hidden">
-        <div class="top-bar">
-            <button onclick="closeSite()">✕ Close</button>
-            <span id="current-url">Loading...</span>
-        </div>
-        <iframe id="web-frame" src=""></iframe>
-    </div>
+    <main class="container">
+        <section class="hero">
+            <h1>Layout Restored</h1>
+            <p>Clean, aligned, and functional.</p>
+            <button id="action-btn">Click Me</button>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
