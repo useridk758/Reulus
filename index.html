@@ -3,27 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reulus | Web</title>
+    <title>Reulus</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1 class="logo">REULUS</h1>
-            <p>Enter a URL to get started</p>
-        </header>
+    <div class="overlay"></div>
+    <main class="content">
+        <div id="clock">00:00 PM</div>
+        <div id="date">SATURDAY, MARCH 28</div>
 
-        <div class="search-box">
-            <input type="text" id="url-input" placeholder="https://google.com or search...">
-            <button id="go-btn">Go</button>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="url-input" placeholder="Search the web or enter URL...">
         </div>
 
-        <div class="quick-links">
-            <div class="link-card" onclick="launch('https://youtube.com')">YouTube</div>
-            <div class="link-card" onclick="launch('https://discord.com')">Discord</div>
-            <div class="link-card" onclick="launch('https://google.com')">Google</div>
+        <div class="app-grid">
+            <div class="app-item" onclick="launch('https://duckduckgo.com')">
+                <div class="icon-wrapper ddg"></div>
+                <span>DuckDuckGo</span>
+            </div>
+            <div class="app-item" onclick="launch('https://wikipedia.org')">
+                <div class="icon-wrapper wiki"></div>
+                <span>Wikipedia</span>
+            </div>
+            <div class="app-item" onclick="launch('https://tiktok.com')">
+                <div class="icon-wrapper tiktok"></div>
+                <span>TikTok</span>
+            </div>
+            <div class="app-item" onclick="launch('https://soundcloud.com')">
+                <div class="icon-wrapper music"></div>
+                <span>Music</span>
+            </div>
+            <div class="app-item" onclick="launch('https://twitch.tv')">
+                <div class="icon-wrapper gaming"></div>
+                <span>Gaming</span>
+            </div>
+            <div class="app-item" onclick="launch('https://roblox.com')">
+                <div class="icon-wrapper roblox"></div>
+                <span>Roblox</span>
+            </div>
         </div>
-    </div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
