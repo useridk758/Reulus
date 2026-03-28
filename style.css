@@ -1,101 +1,95 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+:root {
+    --glass: rgba(255, 255, 255, 0.1);
+    --border: rgba(255, 255, 255, 0.15);
 }
 
-body {
-    height: 100vh;
-    /* Use the URL of your uploaded image here */
-    background: url('your-image-link.jpg') no-repeat center center/cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body, html {
+    margin: 0;
+    height: 100%;
+    background: #000;
+    font-family: 'Outfit', sans-serif;
+    color: white;
     overflow: hidden;
 }
 
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.2); /* Softens the image */
+.wallpaper-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=2000') no-repeat center center/cover;
+    filter: brightness(0.7);
+    z-index: -1;
 }
 
-.content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    width: 100%;
-    max-width: 800px;
+.ui-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding-bottom: 10vh;
 }
 
-#clock {
-    font-size: 6rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
-    letter-spacing: 2px;
+.clock-section #clock {
+    font-size: 8rem;
+    font-weight: 300;
+    margin: 0;
+    letter-spacing: -2px;
 }
 
-#date {
+.clock-section #date {
     font-size: 0.9rem;
-    letter-spacing: 4px;
-    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 5px;
     margin-bottom: 40px;
-    text-transform: uppercase;
+    opacity: 0.8;
 }
 
-.search-container {
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px);
-    border-radius: 50px;
-    padding: 12px 25px;
+.search-bar {
+    width: 550px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--border);
+    border-radius: 18px;
     display: flex;
     align-items: center;
-    width: 60%;
-    margin: 0 auto 50px auto;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 20px;
+    margin-bottom: 50px;
 }
 
-.search-icon { color: rgba(255, 255, 255, 0.5); margin-right: 15px; }
+.search-icon { width: 20px; fill: white; margin-right: 15px; opacity: 0.6; }
 
-#url-input {
+#search-input {
     background: transparent;
     border: none;
     outline: none;
     color: white;
     width: 100%;
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
 
-.app-grid {
+.apps {
     display: flex;
-    justify-content: center;
-    gap: 25px;
+    gap: 30px;
 }
 
-.app-item {
+.app-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: 0.3s;
 }
 
-.app-item:hover { transform: translateY(-5px); }
+.app-card:hover { transform: translateY(-10px); }
 
-.icon-wrapper {
+.app-card img {
     width: 50px;
     height: 50px;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 12px;
-    margin-bottom: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--glass);
+    padding: 10px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    margin-bottom: 10px;
 }
 
-.app-item span {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.8);
-}
+.app-card span { font-size: 0.8rem; opacity: 0.8; }
