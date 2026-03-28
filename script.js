@@ -1,27 +1,28 @@
-function updateClock() {
+function updateTime() {
     const now = new Date();
-    let hours = now.getHours();
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12 || 12;
+    const timeString = now.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        hour12: true 
+    }).replace(' ', '');
     
-    document.getElementById('clock').textContent = `${hours}:${minutes} ${ampm}`;
-    
-    const options = { weekday: 'long', month: 'long', day: 'numeric' };
-    document.getElementById('date').textContent = now.toLocaleDateString('en-US', options).toUpperCase();
+    document.getElementById('clock').innerText = timeString;
+
+    const dateOptions = { weekday: 'long', month: 'long', day: 'numeric' };
+    document.getElementById('date').innerText = now.toLocaleDateString('en-US', dateOptions).toUpperCase();
 }
 
-setInterval(updateClock, 1000);
-updateClock();
+setInterval(updateTime, 1000);
+updateTime();
 
-function launch(url) {
-    window.location.href = url;
-}
-
-document.getElementById('url-input').addEventListener('keypress', function (e) {
+// Search logic
+document.getElementById('search-input').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-        let val = this.value;
-        if (!val.startsWith('http')) val = 'https://www.google.com/search?q=' + val;
-        launch(val);
+        const query = e.target.value;
+        if (query.includes('.') && !query.includes(' ')) {
+            window.location.href = query.startsWith('http') ? query : 'https://' + query;
+        } else {
+            window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+        }
     }
 });
