@@ -5,45 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reulus</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="overlay"></div>
-    <main class="content">
-        <div id="clock">00:00 PM</div>
-        <div id="date">SATURDAY, MARCH 28</div>
-
-        <div class="search-container">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="url-input" placeholder="Search the web or enter URL...">
+    <div class="wallpaper-container" id="wallpaper"></div>
+    
+    <div class="ui-wrapper">
+        <div class="clock-section">
+            <h1 id="clock">00:00</h1>
+            <p id="date">LOADING...</p>
         </div>
 
-        <div class="app-grid">
-            <div class="app-item" onclick="launch('https://duckduckgo.com')">
-                <div class="icon-wrapper ddg"></div>
-                <span>DuckDuckGo</span>
-            </div>
-            <div class="app-item" onclick="launch('https://wikipedia.org')">
-                <div class="icon-wrapper wiki"></div>
-                <span>Wikipedia</span>
-            </div>
-            <div class="app-item" onclick="launch('https://tiktok.com')">
-                <div class="icon-wrapper tiktok"></div>
-                <span>TikTok</span>
-            </div>
-            <div class="app-item" onclick="launch('https://soundcloud.com')">
-                <div class="icon-wrapper music"></div>
-                <span>Music</span>
-            </div>
-            <div class="app-item" onclick="launch('https://twitch.tv')">
-                <div class="icon-wrapper gaming"></div>
-                <span>Gaming</span>
-            </div>
-            <div class="app-item" onclick="launch('https://roblox.com')">
-                <div class="icon-wrapper roblox"></div>
-                <span>Roblox</span>
-            </div>
+        <div class="search-bar">
+            <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <input type="text" id="search-input" placeholder="Search the web or enter URL...">
         </div>
-    </main>
+
+        <div class="apps">
+            <div class="app-card" onclick="location.href='https://duckduckgo.com'"><img src="https://simpleicons.org/icons/duckduckgo.svg" alt=""><span>DuckDuckGo</span></div>
+            <div class="app-card" onclick="location.href='https://wikipedia.org'"><img src="https://simpleicons.org/icons/wikipedia.svg" alt=""><span>Wikipedia</span></div>
+            <div class="app-card" onclick="location.href='https://tiktok.com'"><img src="https://simpleicons.org/icons/tiktok.svg" alt=""><span>TikTok</span></div>
+            <div class="app-card" onclick="location.href='https://soundcloud.com'"><img src="https://simpleicons.org/icons/soundcloud.svg" alt=""><span>Music</span></div>
+            <div class="app-card" onclick="location.href='https://twitch.tv'"><img src="https://simpleicons.org/icons/twitch.svg" alt=""><span>Gaming</span></div>
+            <div class="app-card" onclick="location.href='https://roblox.com'"><img src="https://simpleicons.org/icons/roblox.svg" alt=""><span>Roblox</span></div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
