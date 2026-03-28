@@ -5,58 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reulus</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="wallpaper"></div>
-    
-    <main class="ui-screen" id="main-ui">
-        <div class="clock-wrap">
+    <div class="ui-wrapper" id="main-ui">
+        <div class="clock-section">
             <h1 id="clock">00:00</h1>
             <p id="date">LOADING...</p>
         </div>
 
-        <div class="search-area">
-            <div class="search-bar">
-                <span class="icon">🔍</span>
-                <input type="text" id="search-input" placeholder="Search the web or enter URL..." autocomplete="off">
-            </div>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search or enter URL..." autofocus>
         </div>
 
-        <div class="app-dock">
-            <div class="app" onclick="launch('https://duckduckgo.com')">
-                <div class="icon-box"><img src="https://simpleicons.org/icons/duckduckgo.svg"></div>
-                <span>DuckDuckGo</span>
+        <div class="apps">
+            <div class="app-card" onclick="launch('https://www.google.com')">
+                <img src="https://cdn.simpleicons.org/google/white" alt="">
+                <span>Google</span>
             </div>
-            <div class="app" onclick="launch('https://wikipedia.org')">
-                <div class="icon-box"><img src="https://simpleicons.org/icons/wikipedia.svg"></div>
-                <span>Wikipedia</span>
-            </div>
-            <div class="app" onclick="launch('https://tiktok.com')">
-                <div class="icon-box"><img src="https://simpleicons.org/icons/tiktok.svg"></div>
+            <div class="app-card" onclick="launch('https://www.tiktok.com')">
+                <img src="https://cdn.simpleicons.org/tiktok/white" alt="">
                 <span>TikTok</span>
             </div>
-            <div class="app" onclick="launch('https://soundcloud.com')">
-                <div class="icon-box"><img src="https://simpleicons.org/icons/soundcloud.svg"></div>
-                <span>Music</span>
-            </div>
-            <div class="app" onclick="launch('https://twitch.tv')">
-                <div class="icon-box"><img src="https://simpleicons.org/icons/twitch.svg"></div>
-                <span>Gaming</span>
-            </div>
-            <div class="app" onclick="launch('https://roblox.com')">
-                <div class="icon-box"><img src="https://simpleicons.org/icons/roblox.svg"></div>
+            <div class="app-card" onclick="launch('https://www.roblox.com')">
+                <img src="https://cdn.simpleicons.org/roblox/white" alt="">
                 <span>Roblox</span>
             </div>
+            <div class="app-card" onclick="launch('https://www.twitch.tv')">
+                <img src="https://cdn.simpleicons.org/twitch/white" alt="">
+                <span>Twitch</span>
+            </div>
         </div>
-    </main>
+    </div>
 
-    <div id="browser-layer" class="hidden">
-        <div class="browser-nav">
-            <button onclick="closeBrowser()">← Back to Reulus</button>
-            <span id="display-url"></span>
-        </div>
-        <iframe id="content-frame"></iframe>
+    <div id="view-container" class="hidden">
+        <div class="nav-controls">
+            <button onclick="closeView()" class="close-btn">ESC</button>
+            <span id="current-url"></span>
+            <div style="width: 50px;"></div> </div>
+        <iframe id="browser-frame" src=""></iframe>
     </div>
 
     <script src="script.js"></script>
