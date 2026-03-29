@@ -1,18 +1,32 @@
 :root {
-    --bg-color: #0b0b0b;
-    --card-bg: rgba(255, 255, 255, 0.03);
-    --dock-bg: rgba(20, 20, 20, 0.6);
-    --border: rgba(255, 255, 255, 0.08);
+    --glass: rgba(255, 255, 255, 0.1);
+    --border: rgba(255, 255, 255, 0.12);
+    --dock-bg: rgba(10, 10, 10, 0.7);
 }
+
+* { box-sizing: border-box; }
 
 body, html {
     margin: 0;
+    padding: 0;
     height: 100%;
-    background: var(--bg-color);
-    background-image: radial-gradient(circle at center, #1a1a1a 0%, #0b0b0b 100%);
+    width: 100%;
+    background: #000;
     font-family: 'Outfit', sans-serif;
     color: white;
     overflow: hidden;
+}
+
+.wallpaper-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Put your waterfall image name here */
+    background: url('waterfall.jpg') no-repeat center center/cover;
+    filter: brightness(0.6);
+    z-index: -1;
 }
 
 .ui-wrapper {
@@ -21,20 +35,42 @@ body, html {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    width: 100vw;
+    transition: transform 0.4s ease;
 }
 
-#clock { font-size: 7rem; font-weight: 200; margin: 0; letter-spacing: -2px; }
-#date { font-size: 0.8rem; letter-spacing: 4px; opacity: 0.4; margin-bottom: 40px; }
+.clock-section { text-align: center; }
+
+#clock {
+    font-size: 8rem;
+    font-weight: 200;
+    margin: 0;
+    letter-spacing: -3px;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+#date {
+    font-size: 0.9rem;
+    letter-spacing: 5px;
+    margin-bottom: 40px;
+    opacity: 0.6;
+    text-transform: uppercase;
+}
 
 .search-bar {
-    width: 450px;
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
+    width: 550px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 14px 20px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    padding: 12px 25px;
     margin-bottom: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
 }
+
+.search-icon { width: 20px; fill: white; margin-right: 15px; opacity: 0.5; }
 
 #search-input {
     background: transparent;
@@ -42,14 +78,14 @@ body, html {
     outline: none;
     color: white;
     width: 100%;
-    font-size: 1rem;
-    text-align: center;
+    font-size: 1.1rem;
+    text-align: left;
 }
 
-/* DOCK STYLING */
+/* THE DOCK */
 .dock-container {
     position: absolute;
-    bottom: 30px;
+    bottom: 40px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -57,56 +93,50 @@ body, html {
 
 .dock {
     background: var(--dock-bg);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(25px);
     border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 8px 15px;
+    border-radius: 22px;
+    padding: 10px 18px;
     display: flex;
     align-items: center;
-    gap: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    gap: 10px;
 }
 
 .dock-item {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    color: rgba(255, 255, 255, 0.7);
-    border: 1px solid transparent;
+    transition: 0.2s;
+    color: rgba(255, 255, 255, 0.6);
 }
-
-.dock-item i { width: 18px; height: 18px; }
 
 .dock-item:hover {
     background: rgba(255, 255, 255, 0.1);
     color: white;
-    transform: translateY(-4px);
-    border-color: var(--border);
+    transform: translateY(-5px);
 }
 
 .divider {
     width: 1px;
-    height: 24px;
+    height: 25px;
     background: var(--border);
     margin: 0 5px;
 }
 
 .heart { color: #ff4d4d; }
-.heart:hover { background: rgba(255, 77, 77, 0.15); color: #ff4d4d; }
 
-/* Browser View */
+/* BROWSER VIEW */
 #view-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: #000;
+    background: black;
     z-index: 100;
     display: flex;
     flex-direction: column;
@@ -119,17 +149,16 @@ body, html {
     padding: 12px 20px;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid var(--border);
-    color: white;
+    align-items: center;
 }
 
 .close-btn {
     background: white;
     border: none;
-    padding: 5px 15px;
-    border-radius: 4px;
-    cursor: pointer;
+    padding: 6px 18px;
+    border-radius: 5px;
     font-weight: 600;
+    cursor: pointer;
 }
 
 #browser-frame { flex: 1; border: none; width: 100%; }
