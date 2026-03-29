@@ -23,9 +23,9 @@
         </div>
 
         <div class="shortcut-grid">
-            <div class="shortcut-card" onclick="launch('https://vexo.tv', 'Movies')">
-                <div class="icon-box red"><i data-lucide="play-circle"></i></div>
-                <span>Movies</span>
+            <div class="shortcut-card" onclick="launch('https://duckduckgo.com', 'DuckDuckGo')">
+                <div class="icon-box orange"><img src="https://cdn.simpleicons.org/duckduckgo/white" alt=""></div>
+                <span>DuckDuckGo</span>
             </div>
             <div class="shortcut-card" onclick="launch('https://wikipedia.org', 'Wikipedia')">
                 <div class="icon-box grey"><img src="https://cdn.simpleicons.org/wikipedia/white" alt=""></div>
@@ -35,23 +35,29 @@
                 <div class="icon-box black"><img src="https://cdn.simpleicons.org/tiktok/white" alt=""></div>
                 <span>TikTok</span>
             </div>
+            <div class="shortcut-card" onclick="launch('https://vexo.tv', 'Movies')">
+                <div class="icon-box orange-red"><i data-lucide="play-circle"></i></div>
+                <span>Movies</span>
+            </div>
+            <div class="shortcut-card" onclick="launch('https://twitch.tv', 'Gaming')">
+                <div class="icon-box purple"><img src="https://cdn.simpleicons.org/twitch/white" alt=""></div>
+                <span>Gaming</span>
+            </div>
+            <div class="shortcut-card" onclick="launch('https://roblox.com', 'Roblox')">
+                <div class="icon-box dark-grey"><img src="https://cdn.simpleicons.org/roblox/white" alt=""></div>
+                <span>Roblox</span>
+            </div>
         </div>
 
         <nav class="dock-container">
             <div class="dock">
-                <div class="dock-item" onclick="launch('https://discord.com', 'Discord')"><i data-lucide="message-square"></i></div>
+                <div class="dock-item" onclick="openDiscordModal()"><i data-lucide="message-square"></i></div>
                 <div class="dock-item" onclick="launch('https://vexo.tv', 'Movies')"><i data-lucide="film"></i></div>
-                
                 <div class="dock-item" onclick="openWebSection()"><i data-lucide="globe"></i></div>
-                
                 <div class="dock-item" onclick="openSettings()"><i data-lucide="settings"></i></div>
-                
                 <div class="divider"></div>
-                
                 <div class="dock-item" onclick="launch('https://freezenova.ai/chat/', 'Chatbot')"><i data-lucide="bot"></i></div>
-                
                 <div class="dock-item" onclick="launch('https://monochrome.tf', 'Music')"><i data-lucide="music"></i></div>
-                
                 <div class="dock-item heart"><i data-lucide="heart"></i></div>
             </div>
         </nav>
@@ -64,20 +70,26 @@
                 <button onclick="reloadFrame()" class="nav-btn"><i data-lucide="rotate-cw"></i></button>
             </div>
             <span id="current-url-display">Reulus Web</span>
-            <div class="nav-right">
-                <span id="proxy-status">REULUS SECURE</span>
-            </div>
+            <div class="nav-right"></div>
         </div>
         <iframe id="browser-frame" src=""></iframe>
     </div>
 
+    <div id="discord-modal" class="hidden overlay-view">
+        <div class="modal-box">
+            <i data-lucide="message-square" style="color: #5865F2; margin-bottom: 15px;"></i>
+            <h3>Join the Community</h3>
+            <p>The discord link for Reulus is:</p>
+            <div class="link-display">https://discord.gg/R2KEzG5kN</div>
+            <button class="close-overlay" onclick="closeDiscordModal()">Close</button>
+        </div>
+    </div>
+
     <div id="settings-view" class="hidden overlay-view">
-        <div class="settings-box">
+        <div class="modal-box">
             <h2>Settings</h2>
-            <div class="settings-content">
-                <p>Configure your Reulus experience.</p>
-                <button class="close-overlay" onclick="closeSettings()">Close</button>
-            </div>
+            <p>UI Customization & Proxy Config</p>
+            <button class="close-overlay" onclick="closeSettings()">Close</button>
         </div>
     </div>
 
