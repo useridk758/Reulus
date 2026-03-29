@@ -17,19 +17,32 @@ const urlDisplay = document.getElementById('current-url-display');
 
 function launch(url, title) {
     mainUI.classList.add('hidden');
-    viewContainer.classList.remove('hidden');
-    urlDisplay.innerText = title;
-    frame.src = url;
+    // Small delay for smooth transition
+    setTimeout(() => {
+        viewContainer.classList.remove('hidden');
+        urlDisplay.innerText = title;
+        frame.src = url;
+    }, 300);
 }
 
 function closeView() {
     viewContainer.classList.add('hidden');
-    mainUI.classList.remove('hidden');
-    frame.src = "";
+    setTimeout(() => {
+        mainUI.classList.remove('hidden');
+        frame.src = "";
+    }, 100);
 }
 
 function reloadFrame() {
-    frame.contentWindow.location.reload();
+    frame.src = frame.src; // This actually refreshes the iframe
+}
+
+function openDiscordModal() {
+    document.getElementById('discord-modal').classList.remove('hidden');
+}
+
+function closeDiscordModal() {
+    document.getElementById('discord-modal').classList.add('hidden');
 }
 
 function openSettings() {
@@ -41,7 +54,6 @@ function closeSettings() {
 }
 
 function openWebSection() {
-    // Requirements: Hides bottom buttons, adds navigator bar
     launch('about:blank', 'Reulus Web');
 }
 
