@@ -7,10 +7,8 @@
 * { box-sizing: border-box; }
 
 body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
+    margin: 0; padding: 0;
+    height: 100%; width: 100%;
     background: #000;
     font-family: 'Outfit', sans-serif;
     color: white;
@@ -18,44 +16,21 @@ body, html {
 }
 
 .wallpaper-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Put your waterfall image name here */
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
     background: url('waterfall.jpg') no-repeat center center/cover;
     filter: brightness(0.6);
     z-index: -1;
 }
 
 .ui-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100vw;
-    transition: transform 0.4s ease;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    height: 100vh; width: 100vw;
 }
 
-.clock-section { text-align: center; }
-
-#clock {
-    font-size: 8rem;
-    font-weight: 200;
-    margin: 0;
-    letter-spacing: -3px;
-    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-#date {
-    font-size: 0.9rem;
-    letter-spacing: 5px;
-    margin-bottom: 40px;
-    opacity: 0.6;
-    text-transform: uppercase;
-}
+#clock { font-size: 8rem; font-weight: 200; margin: 0; letter-spacing: -3px; }
+#date { font-size: 0.9rem; letter-spacing: 5px; margin-bottom: 30px; opacity: 0.6; text-transform: uppercase; }
 
 .search-bar {
     width: 550px;
@@ -63,102 +38,60 @@ body, html {
     backdrop-filter: blur(20px);
     border: 1px solid var(--border);
     border-radius: 18px;
-    display: flex;
-    align-items: center;
+    display: flex; align-items: center;
     padding: 12px 25px;
-    margin-bottom: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    margin-bottom: 35px;
 }
 
+#search-input { background: transparent; border: none; outline: none; color: white; width: 100%; font-size: 1.1rem; }
 .search-icon { width: 20px; fill: white; margin-right: 15px; opacity: 0.5; }
 
-#search-input {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: white;
-    width: 100%;
-    font-size: 1.1rem;
-    text-align: left;
-}
-
-/* THE DOCK */
-.dock-container {
-    position: absolute;
-    bottom: 40px;
-    width: 100%;
+/* Shortcut Grid Styles */
+.shortcut-grid {
     display: flex;
-    justify-content: center;
+    gap: 25px;
+    margin-bottom: 50px;
 }
 
-.dock {
-    background: var(--dock-bg);
-    backdrop-filter: blur(25px);
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    padding: 10px 18px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.shortcut-card {
+    display: flex; flex-direction: column;
+    align-items: center; cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
-.dock-item {
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: 0.2s;
-    color: rgba(255, 255, 255, 0.6);
+.shortcut-card:hover { transform: translateY(-5px); }
+
+.icon-box {
+    width: 50px; height: 50px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
-.dock-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    transform: translateY(-5px);
-}
+.icon-box img { width: 24px; height: 24px; }
 
-.divider {
-    width: 1px;
-    height: 25px;
-    background: var(--border);
-    margin: 0 5px;
-}
+.shortcut-card span { font-size: 0.7rem; opacity: 0.5; font-weight: 400; }
 
+/* Icon Box Colors */
+.orange { background: #de5833; }
+.grey { background: #4a4a4a; }
+.black { background: #000000; }
+.orange-red { background: #ff5500; }
+.purple { background: #9146ff; }
+.dark-grey { background: #2a2a2a; }
+
+/* The Dock */
+.dock-container { position: absolute; bottom: 40px; width: 100%; display: flex; justify-content: center; }
+.dock { background: var(--dock-bg); backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 22px; padding: 10px 18px; display: flex; align-items: center; gap: 10px; }
+.dock-item { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; transition: 0.2s; color: rgba(255, 255, 255, 0.6); }
+.dock-item:hover { background: rgba(255, 255, 255, 0.1); color: white; transform: translateY(-5px); }
+.divider { width: 1px; height: 25px; background: var(--border); margin: 0 5px; }
 .heart { color: #ff4d4d; }
 
-/* BROWSER VIEW */
-#view-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-}
-
+/* Browser View */
+#view-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: black; z-index: 100; display: flex; flex-direction: column; }
 .hidden { display: none !important; }
-
-.nav-controls {
-    background: #111;
-    padding: 12px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.close-btn {
-    background: white;
-    border: none;
-    padding: 6px 18px;
-    border-radius: 5px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
+.nav-controls { background: #111; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; }
+.close-btn { background: white; border: none; padding: 6px 18px; border-radius: 5px; font-weight: 600; cursor: pointer; }
 #browser-frame { flex: 1; border: none; width: 100%; }
