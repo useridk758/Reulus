@@ -11,24 +11,24 @@
 <body>
     <div class="wallpaper-container"></div>
     
-    <div id="changelog-overlay" class="overlay-view changelog-fade-in">
+    <div id="changelog-overlay" class="overlay-view">
         <div class="changelog-box">
             <div class="changelog-header">
                 <h2>What's New</h2>
-                <span class="version-tag">v1.2.5</span>
+                <span class="version-tag">v1.3.0</span>
             </div>
             <div class="changelog-body">
                 <div class="change-item">
                     <span class="type-add">ADD</span>
-                    <p>Added smooth hover physics and "pointy" cursors to all buttons.</p>
+                    <p>Settings menu with Wallpaper and Proxy toggles.</p>
                 </div>
                 <div class="change-item">
                     <span class="type-fix">FIX</span>
-                    <p>Restored black shortcut theme and fixed missing dock dividers.</p>
+                    <p>Restored square shortcuts and minimized search bar.</p>
                 </div>
                 <div class="change-item">
                     <span class="type-upd">UPD</span>
-                    <p>Darkened browser navigation bar and added interactive states.</p>
+                    <p>Darkened navigation controls and added global transitions.</p>
                 </div>
             </div>
             <button class="launch-btn" onclick="closeChangelog()">Launch Reulus</button>
@@ -48,27 +48,27 @@
 
         <div class="shortcut-grid">
             <div class="shortcut-card" onclick="launch('https://duckduckgo.com', 'DuckDuckGo')">
-                <div class="icon-box black-theme"><img src="https://cdn.simpleicons.org/duckduckgo/white" alt=""></div>
+                <div class="icon-box-square"><img src="https://cdn.simpleicons.org/duckduckgo/white" alt=""></div>
                 <span>DuckDuckGo</span>
             </div>
             <div class="shortcut-card" onclick="launch('https://wikipedia.org', 'Wikipedia')">
-                <div class="icon-box black-theme"><img src="https://cdn.simpleicons.org/wikipedia/white" alt=""></div>
+                <div class="icon-box-square"><img src="https://cdn.simpleicons.org/wikipedia/white" alt=""></div>
                 <span>Wikipedia</span>
             </div>
             <div class="shortcut-card" onclick="launch('https://tiktok.com', 'TikTok')">
-                <div class="icon-box black-theme"><img src="https://cdn.simpleicons.org/tiktok/white" alt=""></div>
+                <div class="icon-box-square"><img src="https://cdn.simpleicons.org/tiktok/white" alt=""></div>
                 <span>TikTok</span>
             </div>
             <div class="shortcut-card" onclick="launch('https://vexo.tv', 'Movies')">
-                <div class="icon-box black-theme"><i data-lucide="play-circle"></i></div>
+                <div class="icon-box-square"><i data-lucide="play-circle"></i></div>
                 <span>Movies</span>
             </div>
             <div class="shortcut-card" onclick="launch('https://twitch.tv', 'Gaming')">
-                <div class="icon-box black-theme"><img src="https://cdn.simpleicons.org/twitch/white" alt=""></div>
+                <div class="icon-box-square"><img src="https://cdn.simpleicons.org/twitch/white" alt=""></div>
                 <span>Gaming</span>
             </div>
             <div class="shortcut-card" onclick="launch('https://roblox.com', 'Roblox')">
-                <div class="icon-box black-theme"><img src="https://cdn.simpleicons.org/roblox/white" alt=""></div>
+                <div class="icon-box-square"><img src="https://cdn.simpleicons.org/roblox/white" alt=""></div>
                 <span>Roblox</span>
             </div>
         </div>
@@ -78,9 +78,7 @@
                 <div class="dock-item" onclick="openDiscordModal()"><i data-lucide="message-square"></i></div>
                 <div class="dock-item" onclick="launch('https://vexo.tv', 'Movies')"><i data-lucide="film"></i></div>
                 <div class="dock-item" onclick="openWebSection()"><i data-lucide="globe"></i></div>
-                
                 <div class="divider"></div>
-                
                 <div class="dock-item" onclick="openSettings()"><i data-lucide="settings"></i></div>
                 <div class="dock-item" onclick="launch('https://freezenova.ai/chat/', 'Chatbot')"><i data-lucide="bot"></i></div>
                 <div class="dock-item" onclick="launch('https://monochrome.tf', 'Music')"><i data-lucide="music"></i></div>
@@ -92,20 +90,53 @@
     <div id="view-container" class="hidden">
         <div class="nav-controls">
             <div class="nav-left">
-                <button onclick="closeView()" class="nav-btn-dark"><i data-lucide="home"></i></button>
-                <button onclick="reloadFrame()" class="nav-btn-dark"><i data-lucide="rotate-cw"></i></button>
+                <button onclick="closeView()" class="nav-btn-pure-black"><i data-lucide="home"></i></button>
+                <button onclick="reloadFrame()" class="nav-btn-pure-black"><i data-lucide="rotate-cw"></i></button>
             </div>
             <span id="current-url-display">Reulus Web</span>
             <div class="nav-right"></div>
         </div>
+        <div id="web-section-landing" class="hidden">
+            <div class="web-intro">
+                <i data-lucide="globe" size="48"></i>
+                <h2>Reulus Web</h2>
+                <p>Private navigation active. Enter a URL below.</p>
+                <input type="text" id="web-section-search" placeholder="Enter URL or search...">
+            </div>
+        </div>
         <iframe id="browser-frame" src=""></iframe>
+    </div>
+
+    <div id="settings-view" class="hidden overlay-view">
+        <div class="settings-modal">
+            <div class="settings-header">
+                <h3>Settings</h3>
+                <button onclick="closeSettings()" class="close-x">&times;</button>
+            </div>
+            <div class="settings-list">
+                <div class="setting-row">
+                    <span>Stealth Mode</span>
+                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                </div>
+                <div class="setting-row">
+                    <span>Custom Wallpaper</span>
+                    <button class="set-btn">Upload</button>
+                </div>
+                <div class="setting-row">
+                    <span>Proxy Server</span>
+                    <select class="set-select">
+                        <option>Ultraviolet (Default)</option>
+                        <option>Dynamic</option>
+                    </select>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="discord-modal" class="hidden overlay-view">
         <div class="modal-box">
-            <i data-lucide="message-square" style="color: #5865F2; margin-bottom: 15px;"></i>
+            <i data-lucide="message-square" style="color: #5865F2;"></i>
             <h3>Join the Community</h3>
-            <p>The discord link for Reulus is:</p>
             <div class="link-display">https://discord.gg/R2KEzG5kN</div>
             <button class="close-overlay" onclick="closeDiscordModal()">Close</button>
         </div>
