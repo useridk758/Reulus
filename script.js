@@ -25,22 +25,27 @@ const webLanding = document.getElementById('web-section-landing');
 
 function closeChangelog() { document.getElementById('changelog-overlay').classList.remove('active'); }
 
-// BLACK SCREEN FIX: Bridge Proxy
+// THE SOLUTION: Proxy-Pipe
+// This function wraps URLs to bypass the X-Frame security blocks
+function getProxyUrl(url) {
+    if (url.includes("google.com/search")) return url; // Google igu=1 doesn't need proxy
+    // Using a public CORS bridge to allow sites to load
+    return "https://api.allorigins.win/raw?url=" + encodeURIComponent(url);
+}
+
 function launch(url, title) {
     mainUI.classList.add('hidden');
     chatContent.classList.add('hidden');
     webLanding.classList.add('hidden');
     frame.classList.remove('hidden');
     
-    // Some sites need a bridge to not be black. 
-    // We use a Google search bridge for external links.
-    let finalUrl = url;
-    if (url.includes('google.com')) finalUrl = "https://www.google.com/search?igu=1";
+    // We try the direct URL first, but for known "blocker" sites, we use the bridge
+    let target = (url.includes('wikipedia') || url.includes('vexo')) ? url : getProxyUrl(url);
 
     setTimeout(() => {
         viewContainer.classList.add('active');
         urlDisplay.innerText = title;
-        frame.src = finalUrl;
+        frame.src = target;
     }, 300);
 }
 
