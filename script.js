@@ -19,33 +19,32 @@ const mainUI = document.getElementById('main-ui');
 const viewContainer = document.getElementById('view-container');
 const frame = document.getElementById('browser-frame');
 const urlDisplay = document.getElementById('current-url-display');
-
 const chatContent = document.getElementById('chat-maintenance');
 const webLanding = document.getElementById('web-section-landing');
 
 function closeChangelog() { document.getElementById('changelog-overlay').classList.remove('active'); }
 
-// THE SOLUTION: Proxy-Pipe
-// This function wraps URLs to bypass the X-Frame security blocks
-function getProxyUrl(url) {
-    if (url.includes("google.com/search")) return url; // Google igu=1 doesn't need proxy
-    // Using a public CORS bridge to allow sites to load
-    return "https://api.allorigins.win/raw?url=" + encodeURIComponent(url);
-}
-
+// BLACK SCREEN BYPASS LOGIC
 function launch(url, title) {
     mainUI.classList.add('hidden');
     chatContent.classList.add('hidden');
     webLanding.classList.add('hidden');
     frame.classList.remove('hidden');
     
-    // We try the direct URL first, but for known "blocker" sites, we use the bridge
-    let target = (url.includes('wikipedia') || url.includes('vexo')) ? url : getProxyUrl(url);
+    // Logic: Try to use Proxy if the site is a known blocker (like google or tiktok)
+    let finalUrl = url;
+    if (url.includes("google.com") && !url.includes("igu=1")) {
+        finalUrl = "https://www.google.com/search?igu=1";
+    } else if (url.includes("tiktok.com") || url.includes("roblox.com")) {
+        // These sites usually require a professional proxy, 
+        // using AllOrigins as a temporary bridge to try and fetch content.
+        finalUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(url);
+    }
 
     setTimeout(() => {
         viewContainer.classList.add('active');
         urlDisplay.innerText = title;
-        frame.src = target;
+        frame.src = finalUrl;
     }, 300);
 }
 
@@ -87,7 +86,7 @@ function openWebSection() {
 function openSettings() { document.getElementById('settings-view').classList.add('active'); }
 function closeSettings() { document.getElementById('settings-view').classList.remove('active'); }
 
-// Wallpaper Logic
+// Wallpaper
 const wallpaperInput = document.getElementById('wallpaper-input');
 wallpaperInput.onchange = (e) => {
     if(e.target.files[0]) document.getElementById('wallpaper-confirm-box').classList.remove('hidden');
@@ -103,20 +102,22 @@ function applyWallpaper() {
     reader.readAsDataURL(wallpaperInput.files[0]);
 }
 
+// Search Inputs
+const handleSearch = (input) => {
+    let val = input.value;
+    if (!val) return;
+    let url = val.includes('.') ? (val.startsWith('http') ? val : 'https://' + val) : `https://www.bing.com/search?q=${encodeURIComponent(val)}`;
+    launch(url, 'Web View');
+};
+
 document.getElementById('search-input').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        let val = e.target.value;
-        let url = val.includes('.') ? (val.startsWith('http') ? val : 'https://' + val) : `https://www.bing.com/search?q=${encodeURIComponent(val)}`;
-        launch(url, 'Search');
-    }
+    if (e.key === 'Enter') handleSearch(e.target);
 });
 
 document.getElementById('web-section-search').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         webLanding.classList.add('hidden');
         frame.classList.remove('hidden');
-        let val = e.target.value;
-        let url = val.includes('.') ? (val.startsWith('http') ? val : 'https://' + val) : `https://www.bing.com/search?q=${encodeURIComponent(val)}`;
-        launch(url, 'Web View');
+        handleSearch(e.target);
     }
 });
