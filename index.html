@@ -14,7 +14,7 @@
     <div class="ui-wrapper" id="main-ui">
         <div class="clock-section">
             <h1 id="clock">00:00</h1>
-            <p id="date">JANUARY 1, 2026</p>
+            <p id="date">LOADING...</p>
         </div>
 
         <div class="search-bar">
@@ -24,7 +24,7 @@
 
         <div class="shortcut-grid">
             <div class="shortcut-card" onclick="launch('https://www.bing.com', 'Bing')">
-                <div class="icon-box-square"><img src="https://cdn.simpleicons.org/bing/008373" alt="Bing"></div>
+                <div class="icon-box-square"><img src="https://cdn.simpleicons.org/bing/008373"></div>
                 <span>Bing</span>
             </div>
             <div class="shortcut-card" onclick="launch('https://en.m.wikipedia.org', 'Wikipedia')">
@@ -65,42 +65,38 @@
                 <button onclick="closeView()" class="nav-btn"><i data-lucide="home"></i></button>
                 <button onclick="reloadFrame()" class="nav-btn"><i data-lucide="rotate-cw"></i></button>
             </div>
-            <span id="current-url-display" class="centered-title">REULUS BROWSER</span>
+            <span id="current-url-display" class="centered-title">BROWSER</span>
             <div class="nav-right"></div>
         </div>
 
-        <div id="chat-maintenance" class="view-content hidden">
-            <div class="maintenance-box">
-                <i data-lucide="wrench" size="64" color="#ffcc00"></i>
-                <h2>Chatroom</h2>
-                <p>Under Maintenance</p>
+        <div class="content-area">
+            <div id="chat-maintenance" class="view-content hidden">
+                <div class="maintenance-box">
+                    <i data-lucide="wrench" size="64" color="#ffcc00"></i>
+                    <h2>Chatroom</h2>
+                    <p>Under Maintenance</p>
+                </div>
             </div>
-        </div>
 
-        <div id="web-section-landing" class="view-content hidden">
-            <div class="web-intro">
-                <i data-lucide="globe" size="48"></i>
-                <h2>Reulus Web</h2>
-                <input type="text" id="web-section-search" placeholder="Search or enter URL...">
+            <div id="web-section-landing" class="view-content hidden">
+                <div class="web-intro">
+                    <i data-lucide="globe" size="48"></i>
+                    <h2>Reulus Web</h2>
+                    <input type="text" id="web-section-search" placeholder="Enter URL...">
+                </div>
             </div>
-        </div>
 
-        <iframe id="browser-frame" src="about:blank"></iframe>
+            <iframe id="browser-frame" src="about:blank"></iframe>
+        </div>
     </div>
 
     <div id="settings-view" class="hidden overlay-view">
         <div class="settings-modal">
-            <div class="settings-header">
-                <h3>Settings</h3>
-                <button onclick="closeSettings()" class="close-x">&times;</button>
-            </div>
+            <div class="settings-header"><h3>Settings</h3><button onclick="closeSettings()" class="close-x">&times;</button></div>
             <div class="settings-list">
-                <div class="setting-row">
-                    <span>Wallpaper</span>
-                    <input type="file" id="wallpaper-input" hidden accept="image/*">
-                    <button class="set-btn" onclick="document.getElementById('wallpaper-input').click()">Upload</button>
-                </div>
+                <div class="setting-row"><span>Wallpaper</span><button class="set-btn" onclick="document.getElementById('wallpaper-input').click()">Upload</button></div>
             </div>
+            <input type="file" id="wallpaper-input" hidden accept="image/*">
         </div>
     </div>
 
