@@ -1,4 +1,3 @@
-// Time & Date Engine
 function updateTime() {
     const now = new Date();
     const h = now.getHours() % 12 || 12;
@@ -17,25 +16,24 @@ const urlDisplay = document.getElementById('current-url-display');
 const chatView = document.getElementById('chat-maintenance');
 const webView = document.getElementById('web-section-landing');
 
-// 5. BLACK SCREEN FIX: MIRROR LOGIC
+// 5. BLACK SCREEN BYPASS + NAVIGATOR FIX
 function launch(url, title) {
+    // 10. Smooth fade transitions
     mainUI.classList.add('hidden');
     chatView.classList.add('hidden');
     webView.classList.add('hidden');
     frame.classList.remove('hidden');
 
-    // Force fade-in transition
     setTimeout(() => {
         viewContainer.classList.add('active');
         urlDisplay.innerText = title.toUpperCase();
         
-        let finalUrl = url;
-        // If it's a "big" site, we use a mobile mirror or igu mode to prevent black screen
-        if(url.includes("google.com")) finalUrl = "https://www.google.com/search?igu=1";
-        if(url.includes("bing.com")) finalUrl = "https://www.bing.com";
+        // Anti-Black Screen Mirroring
+        let target = url;
+        if(url.includes("google.com")) target = "https://www.google.com/search?igu=1";
         
-        frame.src = finalUrl;
-    }, 150);
+        frame.src = target;
+    }, 200);
 }
 
 function closeView() {
@@ -47,12 +45,11 @@ function closeView() {
 }
 
 function reloadFrame() {
-    const current = frame.src;
-    frame.src = "about:blank";
-    setTimeout(() => frame.src = current, 50);
+    const s = frame.src; frame.src = "";
+    setTimeout(() => frame.src = s, 50);
 }
 
-// 7. All Dock Buttons Operational
+// 7. Dock Buttons Operational
 function openChat() {
     mainUI.classList.add('hidden');
     frame.classList.add('hidden');
@@ -74,28 +71,31 @@ function openWebSection() {
 function openSettings() { document.getElementById('settings-view').classList.add('active'); }
 function closeSettings() { document.getElementById('settings-view').classList.remove('active'); }
 
-// 3. Search Logic: Use Bing for words, URLs for links
-function performSearch(query) {
-    let url;
-    const isUrl = query.includes('.') && !query.includes(' ');
-    
-    if (isUrl) {
-        url = query.startsWith('http') ? query : 'https://' + query;
-    } else {
-        // Force Bing Search for words
-        url = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
-    }
+// 3. Bing Search for words
+function doSearch(q) {
+    if(!q) return;
+    let url = q.includes('.') ? (q.startsWith('http') ? q : 'https://' + q) : `https://www.bing.com/search?q=${encodeURIComponent(q)}`;
     launch(url, 'Search Results');
 }
 
 document.getElementById('search-input').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') performSearch(e.target.value);
+    if (e.key === 'Enter') doSearch(e.target.value);
 });
 
 document.getElementById('web-section-search').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         webView.classList.add('hidden');
         frame.classList.remove('hidden');
-        performSearch(e.target.value);
+        doSearch(e.target.value);
     }
 });
+
+// Wallpaper
+document.getElementById('wallpaper-input').onchange = (e) => {
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+        document.getElementById('bg-layer').style.backgroundImage = `url(${ev.target.result})`;
+        closeSettings();
+    };
+    reader.readAsDataURL(e.target.files[0]);
+};
