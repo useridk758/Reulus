@@ -18,7 +18,7 @@
         </div>
 
         <div class="search-bar">
-            <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <i data-lucide="search" class="search-icon-svg"></i>
             <input type="text" id="search-input" placeholder="Search with Bing...">
         </div>
 
@@ -37,7 +37,7 @@
             </div>
             <div class="shortcut-card" onclick="launch('https://m.twitch.tv', 'Twitch')">
                 <div class="icon-box-square"><img src="https://cdn.simpleicons.org/twitch/white"></div>
-                <span>Gaming</span>
+                <span>Twitch</span>
             </div>
             <div class="shortcut-card" onclick="launch('https://www.roblox.com', 'Roblox')">
                 <div class="icon-box-square"><img src="https://cdn.simpleicons.org/roblox/white"></div>
@@ -65,24 +65,24 @@
                 <button onclick="closeView()" class="nav-btn"><i data-lucide="home"></i></button>
                 <button onclick="reloadFrame()" class="nav-btn"><i data-lucide="rotate-cw"></i></button>
             </div>
-            <span id="current-url-display" class="centered-title">BROWSER</span>
+            <span id="current-url-display" class="centered-title">REULUS BROWSER</span>
             <div class="nav-right"></div>
         </div>
 
-        <div class="content-area">
-            <div id="chat-maintenance" class="view-content hidden">
-                <div class="maintenance-box">
-                    <i data-lucide="wrench" size="64" color="#ffcc00"></i>
+        <div class="content-viewport">
+            <div id="chat-maintenance" class="view-overlay hidden">
+                <div class="status-card">
+                    <i data-lucide="wrench" size="48"></i>
                     <h2>Chatroom</h2>
-                    <p>Under Maintenance</p>
+                    <p>Connection encrypted. Under Maintenance.</p>
                 </div>
             </div>
 
-            <div id="web-section-landing" class="view-content hidden">
-                <div class="web-intro">
+            <div id="web-section-landing" class="view-overlay hidden">
+                <div class="status-card">
                     <i data-lucide="globe" size="48"></i>
-                    <h2>Reulus Web</h2>
-                    <input type="text" id="web-section-search" placeholder="Enter URL...">
+                    <h2>Web Portal</h2>
+                    <input type="text" id="web-section-search" placeholder="Type URL and press Enter...">
                 </div>
             </div>
 
@@ -90,12 +90,14 @@
         </div>
     </div>
 
-    <div id="settings-view" class="hidden overlay-view">
+    <div id="settings-view" class="hidden overlay-blur">
         <div class="settings-modal">
-            <div class="settings-header"><h3>Settings</h3><button onclick="closeSettings()" class="close-x">&times;</button></div>
-            <div class="settings-list">
-                <div class="setting-row"><span>Wallpaper</span><button class="set-btn" onclick="document.getElementById('wallpaper-input').click()">Upload</button></div>
+            <h3>System Settings</h3>
+            <div class="setting-row">
+                <span>Wallpaper</span>
+                <button onclick="document.getElementById('wallpaper-input').click()">Upload Image</button>
             </div>
+            <button class="close-settings-btn" onclick="closeSettings()">Return</button>
             <input type="file" id="wallpaper-input" hidden accept="image/*">
         </div>
     </div>
