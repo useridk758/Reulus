@@ -14,53 +14,63 @@ const mainUI = document.getElementById('main-ui');
 const viewContainer = document.getElementById('view-container');
 const frame = document.getElementById('browser-frame');
 const urlDisplay = document.getElementById('current-url-display');
+const webLanding = document.getElementById('web-section-landing');
 
 function closeChangelog() {
-    const overlay = document.getElementById('changelog-overlay');
-    overlay.style.opacity = '0';
-    overlay.style.transform = 'scale(0.95)';
-    setTimeout(() => {
-        overlay.classList.add('hidden');
-    }, 300);
+    document.getElementById('changelog-overlay').classList.add('hidden');
 }
 
 function launch(url, title) {
     mainUI.classList.add('hidden');
+    webLanding.classList.add('hidden');
+    frame.classList.remove('hidden');
     setTimeout(() => {
         viewContainer.classList.remove('hidden');
         urlDisplay.innerText = title;
         frame.src = url;
-    }, 300);
+    }, 200);
 }
 
 function closeView() {
     viewContainer.classList.add('hidden');
     setTimeout(() => {
         mainUI.classList.remove('hidden');
-        frame.src = "about:blank"; // Reset to prevent background audio
+        frame.src = "about:blank";
     }, 100);
 }
 
 function reloadFrame() {
     const current = frame.src;
-    frame.src = ""; // Clear and reset for true refresh
-    frame.src = current;
+    frame.src = "";
+    setTimeout(() => frame.src = current, 50);
 }
 
+function openSettings() { document.getElementById('settings-view').classList.remove('hidden'); }
+function closeSettings() { document.getElementById('settings-view').classList.add('hidden'); }
 function openDiscordModal() { document.getElementById('discord-modal').classList.remove('hidden'); }
 function closeDiscordModal() { document.getElementById('discord-modal').classList.add('hidden'); }
 
+// 4. Reulus Web Section Logic
 function openWebSection() {
-    launch('about:blank', 'Reulus Web');
+    mainUI.classList.add('hidden');
+    viewContainer.classList.remove('hidden');
+    frame.classList.add('hidden'); // Hide iframe to show landing
+    webLanding.classList.remove('hidden');
+    urlDisplay.innerText = "Reulus Web";
 }
+
+document.getElementById('web-section-search').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        let val = e.target.value;
+        webLanding.classList.add('hidden');
+        frame.classList.remove('hidden');
+        launch(val.includes('.') ? (val.startsWith('http') ? val : 'https://' + val) : `https://www.bing.com/search?q=${val}`, 'Web View');
+    }
+});
 
 document.getElementById('search-input').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         let val = e.target.value;
-        if (val.includes('.') && !val.includes(' ')) {
-            launch(val.startsWith('http') ? val : 'https://' + val, 'Web View');
-        } else {
-            launch(`https://www.google.com/search?q=${encodeURIComponent(val)}`, 'Search');
-        }
+        launch(val.includes('.') ? (val.startsWith('http') ? val : 'https://' + val) : `https://www.bing.com/search?q=${val}`, 'Search');
     }
 });
