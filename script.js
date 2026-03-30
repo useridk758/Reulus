@@ -1,8 +1,8 @@
 window.onload = () => {
-    // Smooth fade in of the What's New screen
+    // 8. Smooth fade in
     setTimeout(() => {
         document.getElementById('changelog-overlay').classList.add('active');
-    }, 500);
+    }, 400);
     updateTime();
 };
 
@@ -12,9 +12,9 @@ function updateTime() {
     const m = String(now.getMinutes()).padStart(2, '0');
     document.getElementById('clock').innerText = `${h}:${m}`;
     
-    // Proper Date Formatting
-    const options = { month: 'long', day: 'numeric', year: 'numeric' };
-    document.getElementById('date').innerText = now.toLocaleDateString('en-US', options).toUpperCase();
+    // Fixed Date Engine
+    const options = { weekday: 'long', month: 'long', day: 'numeric' };
+    document.getElementById('date').innerText = now.toLocaleDateString('en-US', options);
 }
 setInterval(updateTime, 1000);
 
@@ -23,19 +23,23 @@ const viewContainer = document.getElementById('view-container');
 const frame = document.getElementById('browser-frame');
 const urlDisplay = document.getElementById('current-url-display');
 
-function closeChangelog() {
-    document.getElementById('changelog-overlay').classList.remove('active');
-}
+const chatContent = document.getElementById('chat-maintenance');
+const webLanding = document.getElementById('web-section-landing');
 
-// Fixed Launch Logic to prevent black screen
+function closeChangelog() { document.getElementById('changelog-overlay').classList.remove('active'); }
+
+// 7. Operations Logic
 function launch(url, title) {
     mainUI.classList.add('hidden');
-    // Set a timeout to allow the main UI to fade out first
+    chatContent.classList.add('hidden');
+    webLanding.classList.add('hidden');
+    frame.classList.remove('hidden');
+    
     setTimeout(() => {
         viewContainer.classList.add('active');
         urlDisplay.innerText = title;
         frame.src = url;
-    }, 400);
+    }, 300);
 }
 
 function closeView() {
@@ -47,39 +51,69 @@ function closeView() {
 }
 
 function reloadFrame() {
-    const current = frame.src;
-    frame.src = "about:blank";
-    setTimeout(() => frame.src = current, 50);
+    const s = frame.src; frame.src = "";
+    setTimeout(() => frame.src = s, 100);
+}
+
+// 2. Chatroom Logic (In-Site, no prompt)
+function openChat() {
+    mainUI.classList.add('hidden');
+    frame.classList.add('hidden');
+    webLanding.classList.add('hidden');
+    
+    setTimeout(() => {
+        viewContainer.classList.add('active');
+        chatContent.classList.remove('hidden');
+        urlDisplay.innerText = "Chatroom";
+    }, 300);
+}
+
+// 3. Reulus Web Logic
+function openWebSection() {
+    mainUI.classList.add('hidden');
+    frame.classList.add('hidden');
+    chatContent.classList.add('hidden');
+    
+    setTimeout(() => {
+        viewContainer.classList.add('active');
+        webLanding.classList.remove('hidden');
+        urlDisplay.innerText = "Reulus Web";
+    }, 300);
 }
 
 function openSettings() { document.getElementById('settings-view').classList.add('active'); }
 function closeSettings() { document.getElementById('settings-view').classList.remove('active'); }
 
-function openMaintenance() { alert("Chatroom Under Maintenance."); }
-
 // Wallpaper Logic
 const wallpaperInput = document.getElementById('wallpaper-input');
 wallpaperInput.onchange = (e) => {
-    const file = e.target.files[0];
-    if(file) document.getElementById('wallpaper-confirm-box').classList.remove('hidden');
+    if(e.target.files[0]) document.getElementById('wallpaper-confirm-box').classList.remove('hidden');
 };
 
 function applyWallpaper() {
-    const file = wallpaperInput.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
         document.getElementById('bg-layer').style.backgroundImage = `url(${e.target.result})`;
         document.getElementById('wallpaper-confirm-box').classList.add('hidden');
         closeSettings();
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(wallpaperInput.files[0]);
 }
 
+// Search Logic
+const processSearch = (val) => {
+    let url = val.includes('.') ? (val.startsWith('http') ? val : 'https://' + val) : `https://www.bing.com/search?q=${encodeURIComponent(val)}`;
+    launch(url, 'Web View');
+};
+
 document.getElementById('search-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') processSearch(e.target.value);
+});
+
+document.getElementById('web-section-search').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-        let val = e.target.value;
-        // Logic to help prevent blank screen by searching Bing if not a URL
-        let url = val.includes('.') ? (val.startsWith('http') ? val : 'https://' + val) : `https://www.bing.com/search?q=${encodeURIComponent(val)}`;
-        launch(url, 'Web View');
+        webLanding.classList.add('hidden');
+        frame.classList.remove('hidden');
+        processSearch(e.target.value);
     }
 });
