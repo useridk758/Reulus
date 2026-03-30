@@ -1,5 +1,4 @@
 window.onload = () => {
-    // 8. Smooth fade in
     setTimeout(() => {
         document.getElementById('changelog-overlay').classList.add('active');
     }, 400);
@@ -11,8 +10,6 @@ function updateTime() {
     const h = now.getHours() % 12 || 12;
     const m = String(now.getMinutes()).padStart(2, '0');
     document.getElementById('clock').innerText = `${h}:${m}`;
-    
-    // Fixed Date Engine
     const options = { weekday: 'long', month: 'long', day: 'numeric' };
     document.getElementById('date').innerText = now.toLocaleDateString('en-US', options);
 }
@@ -28,17 +25,22 @@ const webLanding = document.getElementById('web-section-landing');
 
 function closeChangelog() { document.getElementById('changelog-overlay').classList.remove('active'); }
 
-// 7. Operations Logic
+// BLACK SCREEN FIX: Bridge Proxy
 function launch(url, title) {
     mainUI.classList.add('hidden');
     chatContent.classList.add('hidden');
     webLanding.classList.add('hidden');
     frame.classList.remove('hidden');
     
+    // Some sites need a bridge to not be black. 
+    // We use a Google search bridge for external links.
+    let finalUrl = url;
+    if (url.includes('google.com')) finalUrl = "https://www.google.com/search?igu=1";
+
     setTimeout(() => {
         viewContainer.classList.add('active');
         urlDisplay.innerText = title;
-        frame.src = url;
+        frame.src = finalUrl;
     }, 300);
 }
 
@@ -55,12 +57,10 @@ function reloadFrame() {
     setTimeout(() => frame.src = s, 100);
 }
 
-// 2. Chatroom Logic (In-Site, no prompt)
 function openChat() {
     mainUI.classList.add('hidden');
     frame.classList.add('hidden');
     webLanding.classList.add('hidden');
-    
     setTimeout(() => {
         viewContainer.classList.add('active');
         chatContent.classList.remove('hidden');
@@ -68,12 +68,10 @@ function openChat() {
     }, 300);
 }
 
-// 3. Reulus Web Logic
 function openWebSection() {
     mainUI.classList.add('hidden');
     frame.classList.add('hidden');
     chatContent.classList.add('hidden');
-    
     setTimeout(() => {
         viewContainer.classList.add('active');
         webLanding.classList.remove('hidden');
@@ -100,20 +98,20 @@ function applyWallpaper() {
     reader.readAsDataURL(wallpaperInput.files[0]);
 }
 
-// Search Logic
-const processSearch = (val) => {
-    let url = val.includes('.') ? (val.startsWith('http') ? val : 'https://' + val) : `https://www.bing.com/search?q=${encodeURIComponent(val)}`;
-    launch(url, 'Web View');
-};
-
 document.getElementById('search-input').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') processSearch(e.target.value);
+    if (e.key === 'Enter') {
+        let val = e.target.value;
+        let url = val.includes('.') ? (val.startsWith('http') ? val : 'https://' + val) : `https://www.bing.com/search?q=${encodeURIComponent(val)}`;
+        launch(url, 'Search');
+    }
 });
 
 document.getElementById('web-section-search').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         webLanding.classList.add('hidden');
         frame.classList.remove('hidden');
-        processSearch(e.target.value);
+        let val = e.target.value;
+        let url = val.includes('.') ? (val.startsWith('http') ? val : 'https://' + val) : `https://www.bing.com/search?q=${encodeURIComponent(val)}`;
+        launch(url, 'Web View');
     }
 });
