@@ -5,63 +5,68 @@
 * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); cursor: default; }
 button, .dock-item, .shortcut-card, .icon-box-square { cursor: pointer !important; }
 
-body, html { margin: 0; height: 100vh; width: 100vw; background: #000; font-family: 'Outfit', sans-serif; color: white; overflow: hidden; }
+body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: #000; font-family: 'Outfit', sans-serif; color: white; overflow: hidden; }
 
 .wallpaper-container {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background: url('waterfall.jpg') no-repeat center center/cover;
     filter: brightness(0.4); z-index: -1;
 }
 
-/* Modal Smooth Fade */
 .overlay-view { 
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-    background: rgba(0,0,0,0.9); z-index: 2000; 
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+    background: rgba(0,0,0,0.92); z-index: 2000; 
     display: flex; align-items: center; justify-content: center; 
-    backdrop-filter: blur(20px); opacity: 0; pointer-events: none;
+    backdrop-filter: blur(25px); opacity: 0; pointer-events: none;
 }
 .overlay-view.active { opacity: 1; pointer-events: auto; }
 
-.ui-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-.ui-wrapper.hidden { opacity: 0; transform: scale(0.98); pointer-events: none; }
+.ui-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100vw; }
+.ui-wrapper.hidden { opacity: 0; transform: scale(0.96); pointer-events: none; }
 
-#clock { font-size: 7.5rem; font-weight: 200; margin: 0; letter-spacing: -3px; }
-#date { font-size: 0.85rem; letter-spacing: 5px; margin-bottom: 25px; opacity: 0.5; text-transform: uppercase; }
+#clock { font-size: 7rem; font-weight: 200; margin: 0; letter-spacing: -3px; }
+#date { font-size: 0.8rem; letter-spacing: 5px; margin-bottom: 30px; opacity: 0.5; }
 
-/* Fixed Search Box Size */
+/* Fixed Small Search Bar */
 .search-bar { 
-    width: 360px; background: rgba(10,10,10,0.8); 
-    border: 1px solid var(--border); border-radius: 14px; 
-    display: flex; align-items: center; padding: 10px 18px; margin-bottom: 40px; 
+    width: 350px; background: rgba(15,15,15,0.8); 
+    border: 1px solid var(--border); border-radius: 12px; 
+    display: flex; align-items: center; padding: 10px 15px; margin-bottom: 50px; 
 }
-#search-input { background: transparent; border: none; outline: none; color: white; width: 100%; font-size: 1rem; cursor: text !important; }
+#search-input { background: transparent; border: none; outline: none; color: white; width: 100%; font-size: 0.95rem; cursor: text !important; }
 
-/* Sharp Squares */
-.shortcut-grid { display: flex; gap: 18px; margin-bottom: 60px; }
+/* Sharp Square Shortcuts - Fixed "Cut Out" Look */
+.shortcut-grid { display: flex; gap: 20px; margin-bottom: 60px; }
 .icon-box-square {
-    width: 52px; height: 52px; background: #000;
-    border-radius: 10px; display: flex; align-items: center; justify-content: center;
-    border: 1px solid var(--border); overflow: hidden;
+    width: 50px; height: 50px; background: #000;
+    border: 1px solid var(--border); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
 }
-.icon-box-square img { width: 100%; height: 100%; object-fit: cover; }
-.shortcut-card span { font-size: 0.65rem; opacity: 0.5; margin-top: 8px; }
+.icon-box-square img { width: 24px; height: 24px; }
+.shortcut-card:hover { transform: translateY(-8px); }
+.shortcut-card span { font-size: 0.65rem; opacity: 0.4; margin-top: 10px; }
 
-/* Dock Fix */
-.dock-container { position: absolute; bottom: 35px; width: 100%; display: flex; justify-content: center; }
-.dock { background: rgba(15,15,15,0.9); border: 1px solid var(--border); border-radius: 20px; padding: 10px 18px; display: flex; align-items: center; gap: 10px; }
-.dock-item { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 12px; }
-.dock-item:hover { background: #222; transform: translateY(-5px); color: white; }
-.divider { width: 1px; height: 24px; background: rgba(255,255,255,0.1); margin: 0 5px; }
-
-/* Fullscreen Browser */
+/* Fullscreen View Fix */
 #view-container { 
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 1000;
-    display: flex; flex-direction: column; opacity: 0; pointer-events: none; transform: translateY(10px);
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+    background: #000; z-index: 1000; display: flex; flex-direction: column; 
+    opacity: 0; pointer-events: none; transform: translateY(20px);
 }
 #view-container.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
-.nav-controls { background: #080808; padding: 12px 25px; display: flex; align-items: center; border-bottom: 1px solid var(--border); }
-.centered-title { position: absolute; left: 50%; transform: translateX(-50%); font-size: 0.85rem; opacity: 0.4; letter-spacing: 2px; }
-.nav-btn-pure-black { background: #000; border: 1px solid #1a1a1a; color: #555; padding: 8px 12px; border-radius: 8px; }
-#browser-frame { flex: 1; border: none; background: white; width: 100%; height: 100%; }
+
+.nav-controls { background: #000; padding: 12px 25px; display: flex; align-items: center; border-bottom: 1px solid var(--border); position: relative; }
+.centered-title { position: absolute; left: 50%; transform: translateX(-50%); font-size: 0.8rem; opacity: 0.5; letter-spacing: 2px; }
+
+.nav-btn-pure-black { background: #000; border: 1px solid #1a1a1a; color: #444; padding: 8px 12px; border-radius: 6px; }
+.nav-btn-pure-black:hover { color: #fff; border-color: #333; }
+
+/* Iframe Full Size Fix */
+#browser-frame { flex: 1; border: none; width: 100%; height: 100%; background: #fff; }
+
+.dock-container { position: absolute; bottom: 35px; width: 100%; display: flex; justify-content: center; }
+.dock { background: rgba(10,10,10,0.9); border: 1px solid var(--border); border-radius: 20px; padding: 8px 15px; display: flex; align-items: center; gap: 10px; }
+.dock-item { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 12px; }
+.dock-item:hover { background: #1a1a1a; transform: translateY(-4px); color: #fff; }
 
 .hidden { display: none !important; }
