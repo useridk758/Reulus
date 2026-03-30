@@ -9,26 +9,26 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <div class="wallpaper-container"></div>
+    <div id="bg-layer" class="wallpaper-container"></div>
     
     <div id="changelog-overlay" class="overlay-view">
         <div class="changelog-box">
             <div class="changelog-header">
                 <h2>What's New</h2>
-                <span class="version-tag">v1.3.0</span>
+                <span class="version-tag">v1.4.0</span>
             </div>
             <div class="changelog-body">
                 <div class="change-item">
                     <span class="type-add">ADD</span>
-                    <p>Settings menu with Wallpaper and Proxy toggles.</p>
+                    <p>Wallpaper upload system in Settings.</p>
                 </div>
                 <div class="change-item">
                     <span class="type-fix">FIX</span>
-                    <p>Restored square shortcuts and minimized search bar.</p>
+                    <p>Fullscreen scaling and centered navigation titles.</p>
                 </div>
                 <div class="change-item">
                     <span class="type-upd">UPD</span>
-                    <p>Darkened navigation controls and added global transitions.</p>
+                    <p>Chatroom set to maintenance mode with toolbox icon.</p>
                 </div>
             </div>
             <button class="launch-btn" onclick="closeChangelog()">Launch Reulus</button>
@@ -75,7 +75,7 @@
 
         <nav class="dock-container">
             <div class="dock">
-                <div class="dock-item" onclick="openDiscordModal()"><i data-lucide="message-square"></i></div>
+                <div class="dock-item" onclick="openChatMaintenance()"><i data-lucide="message-square"></i></div>
                 <div class="dock-item" onclick="launch('https://vexo.tv', 'Movies')"><i data-lucide="film"></i></div>
                 <div class="dock-item" onclick="openWebSection()"><i data-lucide="globe"></i></div>
                 <div class="divider"></div>
@@ -93,18 +93,28 @@
                 <button onclick="closeView()" class="nav-btn-pure-black"><i data-lucide="home"></i></button>
                 <button onclick="reloadFrame()" class="nav-btn-pure-black"><i data-lucide="rotate-cw"></i></button>
             </div>
-            <span id="current-url-display">Reulus Web</span>
+            <span id="current-url-display" class="centered-title">Reulus Web</span>
             <div class="nav-right"></div>
         </div>
+        
         <div id="web-section-landing" class="hidden">
             <div class="web-intro">
                 <i data-lucide="globe" size="48"></i>
                 <h2>Reulus Web</h2>
-                <p>Private navigation active. Enter a URL below.</p>
-                <input type="text" id="web-section-search" placeholder="Enter URL or search...">
+                <p>Private navigation active.</p>
+                <input type="text" id="web-section-search" placeholder="Enter URL...">
             </div>
         </div>
         <iframe id="browser-frame" src=""></iframe>
+    </div>
+
+    <div id="chat-modal" class="hidden overlay-view">
+        <div class="modal-box">
+            <i data-lucide="wrench" style="color: #ffcc00; margin-bottom: 15px;" size="48"></i>
+            <h3>Online Chatroom</h3>
+            <p style="opacity: 0.6;">Under Maintenance</p>
+            <button class="close-overlay" onclick="closeChatMaintenance()">Close</button>
+        </div>
     </div>
 
     <div id="settings-view" class="hidden overlay-view">
@@ -115,30 +125,15 @@
             </div>
             <div class="settings-list">
                 <div class="setting-row">
-                    <span>Stealth Mode</span>
-                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
-                </div>
-                <div class="setting-row">
                     <span>Custom Wallpaper</span>
-                    <button class="set-btn">Upload</button>
+                    <input type="file" id="wallpaper-input" hidden accept="image/*">
+                    <button class="set-btn" onclick="document.getElementById('wallpaper-input').click()">Select Photo</button>
                 </div>
-                <div class="setting-row">
-                    <span>Proxy Server</span>
-                    <select class="set-select">
-                        <option>Ultraviolet (Default)</option>
-                        <option>Dynamic</option>
-                    </select>
+                <div id="wallpaper-confirm-box" class="setting-row hidden" style="border: none; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 10px;">
+                    <span id="file-name-display" style="font-size: 0.7rem;"></span>
+                    <button class="launch-btn" style="width: auto; padding: 5px 15px;" onclick="applyWallpaper()">OK</button>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div id="discord-modal" class="hidden overlay-view">
-        <div class="modal-box">
-            <i data-lucide="message-square" style="color: #5865F2;"></i>
-            <h3>Join the Community</h3>
-            <div class="link-display">https://discord.gg/R2KEzG5kN</div>
-            <button class="close-overlay" onclick="closeDiscordModal()">Close</button>
         </div>
     </div>
 
