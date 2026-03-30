@@ -15,9 +15,17 @@ const viewContainer = document.getElementById('view-container');
 const frame = document.getElementById('browser-frame');
 const urlDisplay = document.getElementById('current-url-display');
 
+// Requirement: Close changelog and show main UI
+function closeChangelog() {
+    const overlay = document.getElementById('changelog-overlay');
+    overlay.style.opacity = '0';
+    setTimeout(() => {
+        overlay.classList.add('hidden');
+    }, 400);
+}
+
 function launch(url, title) {
     mainUI.classList.add('hidden');
-    // Small delay for smooth transition
     setTimeout(() => {
         viewContainer.classList.remove('hidden');
         urlDisplay.innerText = title;
@@ -34,24 +42,15 @@ function closeView() {
 }
 
 function reloadFrame() {
-    frame.src = frame.src; // This actually refreshes the iframe
+    const currentSrc = frame.src;
+    frame.src = '';
+    frame.src = currentSrc;
 }
 
-function openDiscordModal() {
-    document.getElementById('discord-modal').classList.remove('hidden');
-}
-
-function closeDiscordModal() {
-    document.getElementById('discord-modal').classList.add('hidden');
-}
-
-function openSettings() {
-    document.getElementById('settings-view').classList.remove('hidden');
-}
-
-function closeSettings() {
-    document.getElementById('settings-view').classList.add('hidden');
-}
+function openDiscordModal() { document.getElementById('discord-modal').classList.remove('hidden'); }
+function closeDiscordModal() { document.getElementById('discord-modal').classList.add('hidden'); }
+function openSettings() { document.getElementById('settings-view').classList.remove('hidden'); }
+function closeSettings() { document.getElementById('settings-view').classList.add('hidden'); }
 
 function openWebSection() {
     launch('about:blank', 'Reulus Web');
