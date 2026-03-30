@@ -1,3 +1,4 @@
+// Time & Date Engine
 function updateTime() {
     const now = new Date();
     const h = now.getHours() % 12 || 12;
@@ -16,23 +17,25 @@ const urlDisplay = document.getElementById('current-url-display');
 const chatView = document.getElementById('chat-maintenance');
 const webView = document.getElementById('web-section-landing');
 
-// OPERATIONAL LAUNCHER (Fixes Black Screen by forcing embed-compatible URLs)
+// 5. BLACK SCREEN FIX: MIRROR LOGIC
 function launch(url, title) {
     mainUI.classList.add('hidden');
     chatView.classList.add('hidden');
     webView.classList.add('hidden');
     frame.classList.remove('hidden');
 
+    // Force fade-in transition
     setTimeout(() => {
         viewContainer.classList.add('active');
         urlDisplay.innerText = title.toUpperCase();
         
-        // Anti-Black Screen Logic
         let finalUrl = url;
-        if (url.includes("google.com") && !url.includes("igu=1")) finalUrl += "?igu=1";
+        // If it's a "big" site, we use a mobile mirror or igu mode to prevent black screen
+        if(url.includes("google.com")) finalUrl = "https://www.google.com/search?igu=1";
+        if(url.includes("bing.com")) finalUrl = "https://www.bing.com";
         
         frame.src = finalUrl;
-    }, 100);
+    }, 150);
 }
 
 function closeView() {
@@ -40,15 +43,16 @@ function closeView() {
     setTimeout(() => {
         mainUI.classList.remove('hidden');
         frame.src = "about:blank";
-    }, 300);
+    }, 400);
 }
 
 function reloadFrame() {
-    const s = frame.src; frame.src = "";
-    setTimeout(() => frame.src = s, 50);
+    const current = frame.src;
+    frame.src = "about:blank";
+    setTimeout(() => frame.src = current, 50);
 }
 
-// Operational Bottom Middle Buttons
+// 7. All Dock Buttons Operational
 function openChat() {
     mainUI.classList.add('hidden');
     frame.classList.add('hidden');
@@ -70,21 +74,28 @@ function openWebSection() {
 function openSettings() { document.getElementById('settings-view').classList.add('active'); }
 function closeSettings() { document.getElementById('settings-view').classList.remove('active'); }
 
-// Search logic
-document.getElementById('search-input').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        let val = e.target.value;
-        let url = val.includes('.') ? (val.startsWith('http') ? val : 'https://' + val) : `https://www.bing.com/search?q=${encodeURIComponent(val)}`;
-        launch(url, 'Search');
+// 3. Search Logic: Use Bing for words, URLs for links
+function performSearch(query) {
+    let url;
+    const isUrl = query.includes('.') && !query.includes(' ');
+    
+    if (isUrl) {
+        url = query.startsWith('http') ? query : 'https://' + query;
+    } else {
+        // Force Bing Search for words
+        url = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
     }
+    launch(url, 'Search Results');
+}
+
+document.getElementById('search-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') performSearch(e.target.value);
 });
 
 document.getElementById('web-section-search').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         webView.classList.add('hidden');
         frame.classList.remove('hidden');
-        let val = e.target.value;
-        let url = val.includes('.') ? (val.startsWith('http') ? val : 'https://' + val) : `https://www.bing.com/search?q=${encodeURIComponent(val)}`;
-        launch(url, 'Web View');
+        performSearch(e.target.value);
     }
 });
