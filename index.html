@@ -15,21 +15,13 @@
         <div class="changelog-box">
             <div class="changelog-header">
                 <h2>What's New</h2>
-                <span class="version-tag">v1.4.0</span>
+                <span class="version-tag">v1.4.5</span>
             </div>
             <div class="changelog-body">
-                <div class="change-item">
-                    <span class="type-add">ADD</span>
-                    <p>Wallpaper upload system in Settings.</p>
-                </div>
-                <div class="change-item">
-                    <span class="type-fix">FIX</span>
-                    <p>Fullscreen scaling and centered navigation titles.</p>
-                </div>
-                <div class="change-item">
-                    <span class="type-upd">UPD</span>
-                    <p>Chatroom set to maintenance mode with toolbox icon.</p>
-                </div>
+                <div class="change-item"><span class="type-fix">FIX</span><p>Search box size restored to original compact dimensions.</p></div>
+                <div class="change-item"><span class="type-fix">FIX</span><p>Shortcut icons are now sharp, full squares.</p></div>
+                <div class="change-item"><span class="type-fix">FIX</span><p>Dock layout fixed; buttons are no longer smudged.</p></div>
+                <div class="change-item"><span class="type-upd">UPD</span><p>Real-time date engine active.</p></div>
             </div>
             <button class="launch-btn" onclick="closeChangelog()">Launch Reulus</button>
         </div>
@@ -38,8 +30,7 @@
     <div class="ui-wrapper" id="main-ui">
         <div class="clock-section">
             <h1 id="clock">00:00</h1>
-            <p id="date">LOADING...</p>
-        </div>
+            <p id="date">JANUARY 1, 2026</p> </div>
 
         <div class="search-bar">
             <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
@@ -96,25 +87,14 @@
             <span id="current-url-display" class="centered-title">Reulus Web</span>
             <div class="nav-right"></div>
         </div>
-        
         <div id="web-section-landing" class="hidden">
             <div class="web-intro">
                 <i data-lucide="globe" size="48"></i>
                 <h2>Reulus Web</h2>
-                <p>Private navigation active.</p>
                 <input type="text" id="web-section-search" placeholder="Enter URL...">
             </div>
         </div>
         <iframe id="browser-frame" src=""></iframe>
-    </div>
-
-    <div id="chat-modal" class="hidden overlay-view">
-        <div class="modal-box">
-            <i data-lucide="wrench" style="color: #ffcc00; margin-bottom: 15px;" size="48"></i>
-            <h3>Online Chatroom</h3>
-            <p style="opacity: 0.6;">Under Maintenance</p>
-            <button class="close-overlay" onclick="closeChatMaintenance()">Close</button>
-        </div>
     </div>
 
     <div id="settings-view" class="hidden overlay-view">
@@ -125,12 +105,12 @@
             </div>
             <div class="settings-list">
                 <div class="setting-row">
-                    <span>Custom Wallpaper</span>
+                    <span>Wallpaper</span>
                     <input type="file" id="wallpaper-input" hidden accept="image/*">
-                    <button class="set-btn" onclick="document.getElementById('wallpaper-input').click()">Select Photo</button>
+                    <button class="set-btn" onclick="document.getElementById('wallpaper-input').click()">Upload</button>
                 </div>
-                <div id="wallpaper-confirm-box" class="setting-row hidden" style="border: none; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 10px;">
-                    <span id="file-name-display" style="font-size: 0.7rem;"></span>
+                <div id="wallpaper-confirm-box" class="setting-row hidden">
+                    <span id="file-name-display"></span>
                     <button class="launch-btn" style="width: auto; padding: 5px 15px;" onclick="applyWallpaper()">OK</button>
                 </div>
             </div>
