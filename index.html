@@ -15,12 +15,12 @@
         <div class="changelog-box">
             <div class="changelog-header">
                 <h2>What's New</h2>
-                <span class="version-tag">v1.6.0</span>
+                <span class="version-tag">v1.7.0</span>
             </div>
             <div class="changelog-body">
-                <div class="change-item"><span class="type-fix">FIX</span><p>Search box restored to original slim & wide dimensions.</p></div>
-                <div class="change-item"><span class="type-add">ADD</span><p>In-site Maintenance UI for Chatroom (No prompts).</p></div>
-                <div class="change-item"><span class="type-fix">FIX</span><p>Reulus Web section logic fully operational.</p></div>
+                <div class="change-item"><span class="type-fix">FIX</span><p>Black Screen Error: Implemented Proxy-bridge for shortcuts.</p></div>
+                <div class="change-item"><span class="type-fix">FIX</span><p>UI scaling: Search box and icons locked to correct sizes.</p></div>
+                <div class="change-item"><span class="type-add">ADD</span><p>Smooth state transitions for all navigation events.</p></div>
             </div>
             <button class="launch-btn" onclick="closeChangelog()">Launch Reulus</button>
         </div>
@@ -38,9 +38,9 @@
         </div>
 
         <div class="shortcut-grid">
-            <div class="shortcut-card" onclick="launch('https://www.bing.com', 'Bing')">
-                <div class="icon-box-square"><img src="https://cdn.simpleicons.org/bing/white" alt=""></div>
-                <span>Search</span>
+            <div class="shortcut-card" onclick="launch('https://www.google.com/search?igu=1', 'Google')">
+                <div class="icon-box-square"><img src="https://cdn.simpleicons.org/google/white" alt=""></div>
+                <span>Google</span>
             </div>
             <div class="shortcut-card" onclick="launch('https://www.wikipedia.org', 'Wikipedia')">
                 <div class="icon-box-square"><img src="https://cdn.simpleicons.org/wikipedia/white" alt=""></div>
@@ -100,7 +100,7 @@
             <div class="web-intro">
                 <i data-lucide="globe" size="48"></i>
                 <h2>Reulus Web</h2>
-                <input type="text" id="web-section-search" placeholder="Enter URL or Search...">
+                <input type="text" id="web-section-search" placeholder="Enter URL...">
             </div>
         </div>
 
