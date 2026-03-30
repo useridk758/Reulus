@@ -15,13 +15,13 @@ const viewContainer = document.getElementById('view-container');
 const frame = document.getElementById('browser-frame');
 const urlDisplay = document.getElementById('current-url-display');
 
-// Requirement: Close changelog and show main UI
 function closeChangelog() {
     const overlay = document.getElementById('changelog-overlay');
     overlay.style.opacity = '0';
+    overlay.style.transform = 'scale(0.95)';
     setTimeout(() => {
         overlay.classList.add('hidden');
-    }, 400);
+    }, 300);
 }
 
 function launch(url, title) {
@@ -37,20 +37,18 @@ function closeView() {
     viewContainer.classList.add('hidden');
     setTimeout(() => {
         mainUI.classList.remove('hidden');
-        frame.src = "";
+        frame.src = "about:blank"; // Reset to prevent background audio
     }, 100);
 }
 
 function reloadFrame() {
-    const currentSrc = frame.src;
-    frame.src = '';
-    frame.src = currentSrc;
+    const current = frame.src;
+    frame.src = ""; // Clear and reset for true refresh
+    frame.src = current;
 }
 
 function openDiscordModal() { document.getElementById('discord-modal').classList.remove('hidden'); }
 function closeDiscordModal() { document.getElementById('discord-modal').classList.add('hidden'); }
-function openSettings() { document.getElementById('settings-view').classList.remove('hidden'); }
-function closeSettings() { document.getElementById('settings-view').classList.add('hidden'); }
 
 function openWebSection() {
     launch('about:blank', 'Reulus Web');
