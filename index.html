@@ -14,7 +14,7 @@
     <div class="ui-wrapper" id="main-ui">
         <div class="clock-section">
             <h1 id="clock">00:00</h1>
-            <p id="date">LOADING...</p>
+            <p id="date">APRIL 1, 2026</p>
         </div>
 
         <div class="search-bar">
@@ -54,6 +54,7 @@
                 <div class="dock-item" onclick="openSettings()"><i data-lucide="settings"></i></div>
                 <div class="dock-item" onclick="launch('https://freezenova.ai/chat/', 'Chatbot')"><i data-lucide="bot"></i></div>
                 <div class="dock-item" onclick="launch('https://monochrome.tf', 'Music')"><i data-lucide="music"></i></div>
+                <div class="dock-item prank-btn" onclick="aprilFools()"><i data-lucide="party-popper"></i></div>
                 <div class="dock-item heart-red"><i data-lucide="heart"></i></div>
             </div>
         </nav>
@@ -74,31 +75,17 @@
                 <div class="status-card">
                     <i data-lucide="wrench" size="48"></i>
                     <h2>Chatroom</h2>
-                    <p>Connection encrypted. Under Maintenance.</p>
+                    <p>Under Maintenance</p>
                 </div>
             </div>
-
             <div id="web-section-landing" class="view-overlay hidden">
                 <div class="status-card">
                     <i data-lucide="globe" size="48"></i>
                     <h2>Web Portal</h2>
-                    <input type="text" id="web-section-search" placeholder="Type URL and press Enter...">
+                    <input type="text" id="web-section-search" placeholder="Type URL...">
                 </div>
             </div>
-
             <iframe id="browser-frame" src="about:blank"></iframe>
-        </div>
-    </div>
-
-    <div id="settings-view" class="hidden overlay-blur">
-        <div class="settings-modal">
-            <h3>System Settings</h3>
-            <div class="setting-row">
-                <span>Wallpaper</span>
-                <button onclick="document.getElementById('wallpaper-input').click()">Upload Image</button>
-            </div>
-            <button class="close-settings-btn" onclick="closeSettings()">Return</button>
-            <input type="file" id="wallpaper-input" hidden accept="image/*">
         </div>
     </div>
 
