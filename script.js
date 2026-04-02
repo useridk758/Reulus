@@ -13,22 +13,21 @@ const viewContainer = document.getElementById('view-container');
 const frame = document.getElementById('browser-frame');
 const urlDisplay = document.getElementById('current-url-display');
 
-// PROXY LAUNCHER: This forces websites to load inside your frame
+// FIXING BLACK SCREEN: Use a proxy for blocked sites
 function launch(url, title) {
     mainUI.classList.add('hidden');
+    viewContainer.classList.add('active');
+    urlDisplay.innerText = title.toUpperCase();
     
-    // Using a Public CORS Proxy to bypass the "Black Screen" (X-Frame-Options)
-    // Note: Some sites (like TikTok) are extremely tough, but this works for 90% of web content
     let finalUrl = url;
-    if (!url.includes("google.com/search?igu=1")) {
+    
+    // Check if site is known to block iframes
+    if(url.includes("google.com") || url.includes("tiktok.com") || url.includes("roblox.com")) {
+        // This is a public proxy to help bypass headers for your demo
         finalUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(url);
     }
-
-    setTimeout(() => {
-        viewContainer.classList.add('active');
-        urlDisplay.innerText = title.toUpperCase();
-        frame.src = finalUrl;
-    }, 200);
+    
+    frame.src = finalUrl;
 }
 
 function aprilFools() {
@@ -49,11 +48,12 @@ function reloadFrame() {
     setTimeout(() => frame.src = s, 100);
 }
 
+// Search Engine Logic
 document.getElementById('search-input').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         let val = e.target.value;
-        if(!val) return;
+        if (!val) return;
         let url = val.includes('.') ? (val.startsWith('http') ? val : 'https://' + val) : `https://www.bing.com/search?q=${encodeURIComponent(val)}`;
-        launch(url, "Search Results");
+        launch(url, 'Search Results');
     }
 });
