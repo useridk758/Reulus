@@ -1,3 +1,4 @@
+// Clock Engine
 function updateTime() {
     const now = new Date();
     const h = now.getHours() % 12 || 12;
@@ -6,57 +7,81 @@ function updateTime() {
     const options = { weekday: 'long', month: 'long', day: 'numeric' };
     document.getElementById('date').innerText = now.toLocaleDateString('en-US', options).toUpperCase();
 }
-setInterval(updateTime, 1000); updateTime();
+setInterval(updateTime, 1000);
+updateTime();
 
+// UI Elements
 const mainUI = document.getElementById('main-ui');
 const viewContainer = document.getElementById('view-container');
 const frame = document.getElementById('browser-frame');
-const urlDisplay = document.getElementById('current-url-display');
+const urlLabel = document.getElementById('current-url-display');
 
-// FIXING BLACK SCREEN FOR DEMO
+/**
+ * 4 & 5. Launch Function
+ * Opens the Navigator shell and loads the content.
+ */
 function launch(url, title) {
+    // Transition UI Out
     mainUI.classList.add('hidden');
-    viewContainer.classList.add('active');
-    urlDisplay.innerText = title.toUpperCase();
     
-    let target = url;
+    // Setup Navigator
+    urlLabel.innerText = title.toUpperCase();
+    viewContainer.classList.remove('hidden');
     
-    // Most sites block iframes. For your demo, Bing and Wikipedia are the most stable.
-    // If a site is known to block, we use a proxy wrapper to force it to show up.
-    if(url.includes("bing.com") || url.includes("wikipedia.org")) {
-        target = url;
-    } else {
-        // Using a proxy to strip security headers that cause blackness
-        target = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-    }
-    
-    frame.src = target;
+    // Small timeout to allow CSS to catch up for the slide-up effect
+    setTimeout(() => {
+        viewContainer.classList.add('active');
+        
+        // Handle iframe security blocks for the demo
+        let finalUrl = url;
+        if(url.includes("google.com")) finalUrl = "https://www.google.com/search?igu=1";
+        
+        frame.src = finalUrl;
+    }, 50);
 }
 
-function aprilFools() {
-    alert("SYSTEM ALERT: We have a new owner!");
-    // Per your request, this opens in a new tab to avoid frame issues
-    window.open('https://sites.google.com/view/apriltoday', '_blank');
-}
-
+/**
+ * Navigation Controls
+ */
 function closeView() {
     viewContainer.classList.remove('active');
     setTimeout(() => {
+        viewContainer.classList.add('hidden');
         mainUI.classList.remove('hidden');
-        frame.src = "about:blank";
-    }, 400);
+        frame.src = "about:blank"; // Clear frame to save memory
+    }, 600);
 }
 
 function reloadFrame() {
-    const s = frame.src; frame.src = "about:blank";
-    setTimeout(() => frame.src = s, 100);
+    const current = frame.src;
+    frame.src = "about:blank";
+    setTimeout(() => { frame.src = current; }, 100);
 }
 
+/**
+ * 3. Search Logic
+ */
 document.getElementById('search-input').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-        let val = e.target.value;
-        if (!val) return;
-        let url = val.includes('.') ? (val.startsWith('http') ? val : 'https://' + val) : `https://www.bing.com/search?q=${encodeURIComponent(val)}`;
-        launch(url, 'Search Results');
+        const input = e.target.value.trim();
+        if (!input) return;
+
+        let targetUrl;
+        // Check if it's a link or a word
+        if (input.includes('.') && !input.includes(' ')) {
+            targetUrl = input.startsWith('http') ? input : 'https://' + input;
+        } else {
+            // Force Bing for searches
+            targetUrl = `https://www.bing.com/search?q=${encodeURIComponent(input)}`;
+        }
+        launch(targetUrl, 'Search Results');
     }
 });
+
+/**
+ * April Fools Button Logic
+ */
+function aprilFools() {
+    alert("SYSTEM NOTICE: Ownership has been transferred to AprilToday Corp.");
+    window.open('https://sites.google.com/view/apriltoday', '_blank');
+}
