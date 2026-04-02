@@ -13,25 +13,29 @@ const viewContainer = document.getElementById('view-container');
 const frame = document.getElementById('browser-frame');
 const urlDisplay = document.getElementById('current-url-display');
 
-// FIXING BLACK SCREEN: Use a proxy for blocked sites
+// FIXING BLACK SCREEN FOR DEMO
 function launch(url, title) {
     mainUI.classList.add('hidden');
     viewContainer.classList.add('active');
     urlDisplay.innerText = title.toUpperCase();
     
-    let finalUrl = url;
+    let target = url;
     
-    // Check if site is known to block iframes
-    if(url.includes("google.com") || url.includes("tiktok.com") || url.includes("roblox.com")) {
-        // This is a public proxy to help bypass headers for your demo
-        finalUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(url);
+    // Most sites block iframes. For your demo, Bing and Wikipedia are the most stable.
+    // If a site is known to block, we use a proxy wrapper to force it to show up.
+    if(url.includes("bing.com") || url.includes("wikipedia.org")) {
+        target = url;
+    } else {
+        // Using a proxy to strip security headers that cause blackness
+        target = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
     }
     
-    frame.src = finalUrl;
+    frame.src = target;
 }
 
 function aprilFools() {
     alert("SYSTEM ALERT: We have a new owner!");
+    // Per your request, this opens in a new tab to avoid frame issues
     window.open('https://sites.google.com/view/apriltoday', '_blank');
 }
 
@@ -48,7 +52,6 @@ function reloadFrame() {
     setTimeout(() => frame.src = s, 100);
 }
 
-// Search Engine Logic
 document.getElementById('search-input').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         let val = e.target.value;
