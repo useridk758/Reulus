@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reulus</title>
+    <title>Reulus OS</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -47,12 +47,14 @@
 
         <nav class="dock-container">
             <div class="dock">
-                <div class="dock-item" onclick="launch('https://discord.com/app', 'Discord')"><i data-lucide="message-square"></i></div>
-                <div class="dock-item" onclick="launch('https://vexo.tv', 'Movies')"><i data-lucide="film"></i></div>
+                <div class="dock-item" title="Chat" onclick="launch('https://freezenova.ai/chat/', 'Chatbot')"><i data-lucide="bot"></i></div>
+                <div class="dock-item" title="Music" onclick="launch('https://monochrome.tf', 'Music')"><i data-lucide="music"></i></div>
+                <div class="dock-item" title="Movies" onclick="launch('https://vexo.tv', 'Movies')"><i data-lucide="film"></i></div>
+                
                 <div class="divider"></div>
-                <div class="dock-item" onclick="launch('https://freezenova.ai/chat/', 'Chatbot')"><i data-lucide="bot"></i></div>
-                <div class="dock-item" onclick="launch('https://monochrome.tf', 'Music')"><i data-lucide="music"></i></div>
-                <div class="dock-item prank-btn" onclick="aprilFools()"><i data-lucide="party-popper"></i></div>
+                
+                <div class="dock-item prank-btn" title="System Update" onclick="aprilFools()"><i data-lucide="party-popper"></i></div>
+                
                 <div class="dock-item heart-red"><i data-lucide="heart"></i></div>
             </div>
         </nav>
@@ -64,10 +66,15 @@
                 <button onclick="closeView()" class="nav-btn"><i data-lucide="home"></i></button>
                 <button onclick="reloadFrame()" class="nav-btn"><i data-lucide="rotate-cw"></i></button>
             </div>
-            <span id="current-url-display" class="centered-title">REULUS BROWSER</span>
+            <div class="nav-center">
+                <span id="current-url-display">REULUS SECURE BROWSER</span>
+            </div>
+            <div class="nav-right">
+                <div class="status-dot"></div>
+            </div>
         </div>
-        <div class="frame-container">
-            <iframe id="browser-frame" src="about:blank"></iframe>
+        <div class="browser-body">
+            <iframe id="browser-frame" src="about:blank" allow="autoplay; encrypted-media; fullscreen"></iframe>
         </div>
     </div>
 
