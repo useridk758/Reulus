@@ -1,6 +1,6 @@
 :root { 
     --border: rgba(255, 255, 255, 0.1); 
-    --accent: #ff3b30;
+    --accent-red: #ff3b30;
 }
 
 * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: default; }
@@ -18,39 +18,36 @@ body, html {
     filter: brightness(0.3); z-index: -1;
 }
 
-/* 10. Smooth Transitions */
+/* Dashboard UI Fade-In */
 .ui-wrapper { 
     display: flex; flex-direction: column; align-items: center; justify-content: center; 
-    height: 100vh; width: 100vw; opacity: 1; visibility: visible;
+    height: 100vh; width: 100vw; opacity: 1;
 }
-.ui-wrapper.hidden { opacity: 0; visibility: hidden; transform: scale(1.05); }
+.ui-wrapper.hidden { opacity: 0; transform: scale(1.05); pointer-events: none; }
 
 #clock { font-size: 8rem; font-weight: 200; margin: 0; letter-spacing: -4px; }
 #date { font-size: 0.9rem; letter-spacing: 5px; margin-bottom: 40px; opacity: 0.6; text-transform: uppercase; }
 
-/* 2 & 3. Search Bar Logic */
 .search-bar { 
     width: 500px; height: 46px; background: rgba(20,20,20,0.8); 
     border: 1px solid var(--border); border-radius: 14px; 
     display: flex; align-items: center; padding: 0 20px; margin-bottom: 60px; 
     backdrop-filter: blur(10px);
 }
-#search-input { background: transparent; border: none; outline: none; color: white; width: 100%; font-size: 1rem; }
+#search-input { background: transparent; border: none; outline: none; color: white; width: 100%; font-size: 1rem; cursor: text !important; }
 .search-icon-svg { width: 18px; color: rgba(255,255,255,0.3); margin-right: 15px; }
 
-/* Shortcuts */
 .shortcut-grid { display: flex; gap: 25px; margin-bottom: 80px; }
-.shortcut-card { display: flex; flex-direction: column; align-items: center; }
 .icon-box-square { 
     width: 60px; height: 60px; background: #000; 
     border: 1px solid var(--border); border-radius: 16px; 
     display: flex; align-items: center; justify-content: center; 
 }
-.icon-box-square img { width: 30px; height: 30px; object-fit: contain; }
+.icon-box-square img { width: 30px; height: 30px; }
+.shortcut-card span { font-size: 0.75rem; opacity: 0.5; margin-top: 12px; display: block; text-align: center; }
 .shortcut-card:hover { transform: translateY(-10px); }
-.shortcut-card span { font-size: 0.75rem; opacity: 0.5; margin-top: 12px; }
 
-/* 7 & 9. Dock and Red Heart */
+/* Dock Styling */
 .dock-container { position: absolute; bottom: 40px; width: 100%; display: flex; justify-content: center; }
 .dock { 
     background: rgba(15,15,15,0.9); border: 1px solid var(--border); 
@@ -60,10 +57,11 @@ body, html {
 .dock-item { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 14px; color: #777; }
 .dock-item:hover { color: #fff; background: rgba(255,255,255,0.08); transform: translateY(-5px); }
 .divider { width: 1px; height: 24px; background: rgba(255,255,255,0.1); margin: 0 10px; }
-.heart-red { color: var(--accent) !important; opacity: 1 !important; }
-.prank-btn { color: #ffcc00 !important; }
 
-/* 4 & 5. Browser Shell & Error Fix */
+.brand-icon { color: #007aff !important; }
+.heart-red { color: var(--accent-red) !important; }
+
+/* Navigator Shell */
 #view-container { 
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
     background: #000; z-index: 2000; display: flex; flex-direction: column; 
@@ -80,11 +78,10 @@ body, html {
     background: #1a1a1a; border: 1px solid #333; color: #fff; 
     padding: 10px 18px; border-radius: 10px; 
 }
-.nav-btn:hover { background: #333; }
 #current-url-display { font-size: 0.8rem; letter-spacing: 3px; opacity: 0.4; text-transform: uppercase; }
 
-.browser-body { flex: 1; background: #fff; position: relative; }
-#browser-frame { width: 100%; height: 100%; border: none; background: #fff; }
+.browser-body { flex: 1; background: #fff; }
+#browser-frame { width: 100%; height: 100%; border: none; }
 
 .status-dot { width: 8px; height: 8px; background: #34c759; border-radius: 50%; box-shadow: 0 0 10px #34c759; }
 
