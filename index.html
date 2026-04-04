@@ -14,7 +14,7 @@
     <div class="ui-wrapper" id="main-ui">
         <div class="clock-section">
             <h1 id="clock">00:00</h1>
-            <p id="date">APRIL 1, 2026</p>
+            <p id="date">LOADING OS...</p>
         </div>
 
         <div class="search-bar">
@@ -23,7 +23,7 @@
         </div>
 
         <div class="shortcut-grid">
-            <div class="shortcut-card" onclick="launch('https://www.bing.com', 'Bing')">
+            <div class="shortcut-card" onclick="launch('https://www.bing.com', 'Bing Search')">
                 <div class="icon-box-square"><img src="https://cdn.simpleicons.org/bing/008373"></div>
                 <span>Bing</span>
             </div>
@@ -47,15 +47,16 @@
 
         <nav class="dock-container">
             <div class="dock">
-                <div class="dock-item" title="Chat" onclick="launch('https://freezenova.ai/chat/', 'Chatbot')"><i data-lucide="bot"></i></div>
-                <div class="dock-item" title="Music" onclick="launch('https://monochrome.tf', 'Music')"><i data-lucide="music"></i></div>
-                <div class="dock-item" title="Movies" onclick="launch('https://vexo.tv', 'Movies')"><i data-lucide="film"></i></div>
+                <div class="dock-item brand-icon" title="Reulus Home" onclick="location.reload()"><i data-lucide="layout-grid"></i></div>
+                <div class="divider"></div>
+                
+                <div class="dock-item" title="Chatbot" onclick="launch('https://freezenova.ai/chat/', 'Reulus AI')"><i data-lucide="bot"></i></div>
+                <div class="dock-item" title="Music" onclick="launch('https://monochrome.tf', 'Reulus Music')"><i data-lucide="music"></i></div>
+                <div class="dock-item" title="Movies" onclick="launch('https://vexo.tv', 'Reulus Movies')"><i data-lucide="film"></i></div>
                 
                 <div class="divider"></div>
                 
-                <div class="dock-item prank-btn" title="System Update" onclick="aprilFools()"><i data-lucide="party-popper"></i></div>
-                
-                <div class="dock-item heart-red"><i data-lucide="heart"></i></div>
+                <div class="dock-item heart-red" onclick="heartMessage()"><i data-lucide="heart"></i></div>
             </div>
         </nav>
     </div>
@@ -67,14 +68,18 @@
                 <button onclick="reloadFrame()" class="nav-btn"><i data-lucide="rotate-cw"></i></button>
             </div>
             <div class="nav-center">
-                <span id="current-url-display">REULUS SECURE BROWSER</span>
+                <span id="current-url-display">REULUS BROWSER</span>
             </div>
             <div class="nav-right">
                 <div class="status-dot"></div>
             </div>
         </div>
         <div class="browser-body">
-            <iframe id="browser-frame" src="about:blank" allow="autoplay; encrypted-media; fullscreen"></iframe>
+            <iframe id="browser-frame" 
+                    src="about:blank" 
+                    allow="autoplay; encrypted-media; fullscreen"
+                    sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin">
+            </iframe>
         </div>
     </div>
 
